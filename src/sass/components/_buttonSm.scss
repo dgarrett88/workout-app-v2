@@ -1,0 +1,8 @@
+@use "../abstracts" as *;
+
+.button-sm {
+    height: 152px;
+    width: 158px;
+    border: 1px solid $darkBlue;
+    border-radius: 10px;
+}

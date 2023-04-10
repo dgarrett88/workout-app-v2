@@ -1,0 +1,98 @@
+@use "../abstracts" as *;
+
+@keyframes menuOpen {
+    0% {
+      transform: scaleX(1);
+    }
+  
+    100% {
+      transform: scaleX(2);
+
+      
+    }
+  }
+  
+
+
+@media (max-width: 576.98px) { 
+    
+    .button-lg-container {
+        // min-width: 20.938rem;
+        // max-width: 25.875rem;
+        width: 100vw;
+        padding: 0;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        overflow: hidden;
+
+
+        .button-lg {
+            // min-width: 9.875rem;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            aspect-ratio: 1/1;
+            // min-width: 9.8em;
+            // max-width: 25.874rem;
+            width: 40vw;
+            background-color: $lightBlue;
+            border: 1px solid $darkBlue;
+            border-radius: 10px;
+
+            transition: width 2s ease-in-out;
+          
+
+
+    
+            .button-lg-top {
+                height: 7.625rem;
+                display: grid;
+                place-items: center;
+
+                img {
+                    min-width: 6.25rem;
+                    min-height: 6.25rem;
+                }
+            }
+    
+            .button-lg-bottom {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $medBlue;
+                border-top: 1px solid $darkBlue;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+
+                p {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    margin: 0.5rem;
+                }
+            }
+        }
+        .active {
+            // animation: menuOpen forwards 500ms 
+            // cubic-bezier(0.42, 0, 0.58, 1);
+            width: 90vw;
+            height: 60vw;
+            // animation-delay: 500ms;
+            // transition: width 1s ease-out forwards;
+            
+          }
+    }
+ }
+
+//  .expanding-div {
+//     background-color: #f2f2f2;
+//     height: 50px;
+//     width: 50px;
+//     transition: width 0.5s ease-in-out; /* This line sets the transition effect */
+//   }
+  
+//   .expanding-div:hover {
+//     width: 200px; /* This line sets the width to expand to when the div is hovered over */
+//   }
+ 

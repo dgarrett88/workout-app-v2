@@ -1,0 +1,51 @@
+@use "../abstracts" as *;
+
+.searchbar-container {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 1.875rem;
+    display: flex;
+    justify-content: center;
+
+    .searchbar {
+        width: 15.625rem;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border: 0px solid $lightBlue;
+        border-radius: 10px;
+
+        // .searchbar-form {
+            // background-color: white;
+            // height: 1.875rem;
+            // overflow: hidden;
+            // border: 1px solid $lightBlue;
+            // border-radius: 10px;
+
+
+            .searchbar-input {
+                padding: 0;
+                width: 13.68rem;
+                height: 1.875rem;
+                border: 1px solid $lightBlue;
+                border-right: none;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+    
+            .searchbar-button {
+                width: 1.875rem;
+                height: 1.875rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid $lightBlue;
+                border-radius: 10px;
+                background-color: white;
+            }
+        // }
+
+        
+    }
+}

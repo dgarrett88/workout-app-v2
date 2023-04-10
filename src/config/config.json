@@ -1,0 +1,7 @@
+{
+    "baseURL": "https://exercisedb.p.rapidapi.com/exercises/",
+    "headers": {
+        "X-RapidAPI-Key": "360a6abca3mshcfce9cbd521f228p1e181djsn14d1d0e4c955",
+        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
+      }
+}
