@@ -52,6 +52,21 @@ const ButtonLg = () => {
     console.log("BUTTON STATE ---- ", buttonState);
     console.log("DYNAMIC REF 0 ---- ", dynamicRefs.current[0]);
     console.log("DYNAMIC REF 1 ---- ", dynamicRefs.current[1]);
+
+    if (buttonState[0].expanded === true && buttonState[1].expanded === false) {
+      dynamicRefs.current[1].className = "hidden";
+    } else if (
+      buttonState[1].expanded === true &&
+      buttonState[0].expanded === false
+    ) {
+      dynamicRefs.current[0].className = "hidden";
+    } else if (
+      buttonState[1].expanded === false &&
+      buttonState[0].expanded === false
+    ) {
+      dynamicRefs.current[0].className = "button-lg";
+      dynamicRefs.current[1].className = "button-lg";
+    }
   }, [buttonState]);
 
   return (
@@ -67,27 +82,38 @@ const ButtonLg = () => {
           ref={(el) => (dynamicRefs.current[i] = el)}
           onClick={() => handleClick(i)}
         >
+          <div
+            className={`button-expand-list-header ${
+              buttonState[i].expanded ? "" : "hidden"
+            }`}
+          >
+            <div className="close-button-container">close btn here</div>
+            <div className="button-expand-header-title-container">
+              <h4>{item.id}</h4>
+            </div>
+          </div>
           {/* TEST */}
 
           {item.list.map((listItem) => (
-            <div key={listItem} className="button-expand-list">
+            <div
+              key={listItem}
+              className={`button-expand-list ${
+                buttonState[i].expanded ? "" : "hidden"
+              }`}
+            >
               <div className="button-expand-list-label-container">
-                <label className="button-expand-list-label" htmlFor={item.list}>
+                <label
+                  className="button-expand-list-label"
+                  htmlFor={listItem}
+                  name={listItem}
+                >
                   {listItem}
                 </label>
-              </div>
-              <div className="button-expand-list-checkbox-container">
-                <input
-                  className="button-expand-list-checkbox"
-                  type="checkbox"
-                  name={item.list}
-                  value={listItem}
-                />
               </div>
             </div>
           ))}
 
-          {/* TEST */}
+          {/* TEST END */}
 
           <div
             className={`button-lg-top ${
