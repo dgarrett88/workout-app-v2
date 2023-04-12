@@ -10,7 +10,6 @@ import {
   getEquipment,
 } from "../../services/api";
 
-import Checkbox from "./Checkbox";
 
 const ButtonLg = () => {
   const menuItems = arrays.menuItems;

@@ -1,35 +1,62 @@
 @use "../abstracts" as *;
 
-@keyframes menuOpen {
-  0% {
-    transform: scaleX(1);
-  }
+@keyframes expandWidth {
+    from {
+        width: 40vw;
+    }
+    to {
+        width: 88vw;
+    }
+}
 
-  100% {
-    transform: scaleX(2);
-  }
+@keyframes expandHeight {
+    from {
+        height: auto;
+    }
+    to {
+        height: 60vh;
+    }
+}
+
+@keyframes fadeIn1 {
+    0% {
+        display: none !important;
+        opacity: 0%;
+    }
+    1% {
+        display: flex;
+        opacity: 0%;
+    }
+    100% {
+        display: flex;
+        opacity: 100%;
+    }
+
 }
 
 @keyframes fadeOut {
   0% {
     opacity: 100%;
-    display: flex;
+    // display: flex;
   }
   99% {
     opacity: 0%;
-}
-100% {
+  }
+  100% {
     opacity: 0%;
     display: none !important;
-    
-}
+  }
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0%;
+    display: none !important;
   }
-  to {
+  99% {
+    // display: flex;
+  }
+  100% {
     opacity: 100%;
   }
 }
@@ -43,8 +70,10 @@
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    // justify-content: space-evenly;
     overflow: hidden;
+
+   
 
     .button-lg {
       display: flex;
@@ -59,13 +88,20 @@
 
       transition: width 500ms ease-out;
 
+      &:nth-child(1) {
+        margin: 0 auto 0 6vw;
+      }
+    &:nth-child(2) {
+        margin: 0 6vw 0 auto;
+      }
+
       .button-lg-top {
         height: 7.625rem;
         display: grid;
         place-items: center;
 
         img {
-            margin-top: 1.5rem;
+          margin-top: 1.5rem;
           min-width: 6.25rem;
           min-height: 6.25rem;
         }
@@ -113,47 +149,40 @@
 
       .button-expand-list-label-container {
         width: 95%;
-        display: flex;
-        justify-content: center;
+        text-align: center;
       }
 
-      .button-expand-list-checkbox-container {
-        width: 10%;
-        display: flex;
-        justify-content: flex-end;
-      }
+
     }
 
     .active {
-      width: 88vw;
-      height: auto;
-      display: flex;
-      margin: 0 auto 0 6vw;
+    //   width: 88vw;
+    animation: expandWidth 250ms ease-out forwards,
+              //  fadeIn1 250ms ease-out 250ms forwards
+            ;
+            // animation: 
+            // name 
+            // duration 
+            // timing-function 
+            // delay 
+            // iteration-count 
+            // direction 
+            // fill-mode
+
+
     }
 
     .inactive {
       // transition-delay: 2s;
-      animation: fadeIn 250ms forwards ease-out;
-      transform-origin: left;
+      // animation: fadeIn1 250ms forwards ease-out;
     }
   }
 
   .hidden {
-    // visibility: hidden;
-    // animation: fadeOut 250ms forwards ease-out;
-    // height:0;
-    // width: 0;
     display: none !important;
   }
 }
 
-//  .expanding-div {
-//     background-color: #f2f2f2;
-//     height: 50px;
-//     width: 50px;
-//     transition: width 0.5s ease-in-out; /* This line sets the transition effect */
-//   }
-
-//   .expanding-div:hover {
-//     width: 200px; /* This line sets the width to expand to when the div is hovered over */
-//   }
+.fadeInDelay {
+  animation: fadeIn1 500ms ease-in-out 500ms forwards;
+}
