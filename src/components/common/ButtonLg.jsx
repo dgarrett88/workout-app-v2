@@ -10,7 +10,6 @@ import {
   getEquipment,
 } from "../../services/api";
 
-
 const ButtonLg = () => {
   const menuItems = arrays.menuItems;
   const dynamicRefs = useRef([]);
@@ -19,7 +18,7 @@ const ButtonLg = () => {
   const buttonStateContentMap = menuItems.map((item) => {
     buttonStateContent.push({
       expanded: false,
-      // value: `${item.id}`
+      value: `${item.id}`,
     });
   });
 
@@ -63,8 +62,8 @@ const ButtonLg = () => {
       buttonState[1].expanded === false &&
       buttonState[0].expanded === false
     ) {
-      dynamicRefs.current[0].className = "button-lg";
-      dynamicRefs.current[1].className = "button-lg";
+      dynamicRefs.current[0].className = "button-lg inactive";
+      dynamicRefs.current[1].className = "button-lg inactive";
     }
   }, [buttonState]);
 
@@ -86,7 +85,11 @@ const ButtonLg = () => {
               buttonState[i].expanded ? "" : "hidden"
             }`}
           >
-            <div className="close-button-container">close btn here</div>
+            <div className="close-button-container">
+              <div className="close-button">
+                <p>X</p>
+              </div>
+            </div>
             <div className="button-expand-header-title-container">
               <h4>{item.id}</h4>
             </div>
@@ -100,14 +103,14 @@ const ButtonLg = () => {
                 buttonState[i].expanded ? "" : "hidden"
               }`}
             >
-              <div className="button-expand-list-label-container">
-                <label
-                  className="button-expand-list-label"
+              <div className="button-expand-list-text-container">
+                <p
+                  className="button-expand-list-text"
                   htmlFor={listItem}
                   name={listItem}
                 >
                   {listItem}
-                </label>
+                </p>
               </div>
             </div>
           ))}

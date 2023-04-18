@@ -124,6 +124,35 @@
       }
     }
 
+    .close-button-container {
+      display: flex;
+      justify-content: center;
+      .close-button {
+        width: 2rem;
+        height: 2rem;
+
+        box-shadow: 0px 0px 0px 2px #648db6;
+        background: linear-gradient(to bottom, #648db6 5%, #283655 100%);
+        background-color: #ff0026;
+        border-radius: 100px;
+        border: 1px solid #4e6096;
+        cursor: pointer;
+        color: #ffffff;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #283966;
+      }
+
+      p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
     .button-expand-list {
       width: 98%;
       height: 2.5rem;
@@ -147,34 +176,28 @@
         background-color: red;
       }
 
-      .button-expand-list-label-container {
+
+
+      .button-expand-list-text-container {
         width: 95%;
         text-align: center;
+
+        .button-expand-list-text {
+          margin: 0;
+          padding: 0;
+        }
       }
 
 
     }
 
     .active {
-    //   width: 88vw;
-    animation: expandWidth 250ms ease-out forwards,
-              //  fadeIn1 250ms ease-out 250ms forwards
-            ;
-            // animation: 
-            // name 
-            // duration 
-            // timing-function 
-            // delay 
-            // iteration-count 
-            // direction 
-            // fill-mode
-
-
+    animation: expandWidth 250ms ease-out forwards;
     }
 
     .inactive {
-      // transition-delay: 2s;
-      // animation: fadeIn1 250ms forwards ease-out;
+      transition-delay: 2s;
+      animation: fadeIn1 250ms forwards ease-out;
     }
   }
 
@@ -184,5 +207,8 @@
 }
 
 .fadeInDelay {
-  animation: fadeIn1 500ms ease-in-out 500ms forwards;
+  animation: fadeIn1 500ms ease-in-out forwards;
+  animation-delay: 500ms;
 }
+
+
