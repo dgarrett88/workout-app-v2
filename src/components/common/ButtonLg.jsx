@@ -11,6 +11,7 @@ import {
 } from "../../services/api";
 
 const ButtonLg = () => {
+  const [selected, setSelected] = useState([]);
 
   const menuItems = arrays.menuItems;
   const dynamicRefs = useRef([]);
@@ -20,7 +21,6 @@ const ButtonLg = () => {
 
   // Mapping over top level of json creating 2 objects
   const buttonStateContentMap = menuItems.map((item) => {
-
     // Pushing key value pairs to buttonStateContent array
     buttonStateContent.push({
       expanded: false,
@@ -32,11 +32,9 @@ const ButtonLg = () => {
   const [buttonState, setButtonState] = useState(buttonStateContent);
 
   const handleClick = (i) => {
-
     // Mapping over buttonState
     const updateButtonInState = buttonState.map((buttonState, index) => {
       if (i === index) {
-
         // Spreading values of clicked button state,
         // checking to see if current button state is expanded
         // if not change expanded value
@@ -54,12 +52,20 @@ const ButtonLg = () => {
     setButtonState(updateButtonInState);
   };
 
-
+  const handleStateValue = (i, value) => {
+    if (selected.includes(value)) {
+      setSelected(selected.filter((item) => item !== value));
+    } else {
+      setSelected([...selected, value]);
+    }
+  };
 
   useEffect(() => {
     console.log("BUTTON STATE ---- ", buttonState);
     console.log("DYNAMIC REF 0 ---- ", dynamicRefs.current[0]);
+    console.log("DYNAMIC REF 0 DEEP ---- ", dynamicRefs.current[0]);
     console.log("DYNAMIC REF 1 ---- ", dynamicRefs.current[1]);
+    console.log("SELECTED", selected);
 
     // Changing classes to hide inactive content
     if (buttonState[0].expanded === true && buttonState[1].expanded === false) {
@@ -76,7 +82,7 @@ const ButtonLg = () => {
       dynamicRefs.current[0].className = "button-lg inactive";
       dynamicRefs.current[1].className = "button-lg inactive";
     }
-  }, [buttonState]);
+  }, [buttonState, selected]);
 
   return (
     <div className="button-lg-container">
@@ -98,24 +104,24 @@ const ButtonLg = () => {
             }`}
           >
             <div className="close-button-container">
-            <div
-    className="close-button"
-    onClick={() =>
-      setButtonState(
-        buttonState.map((buttonState, index) => {
-          if (i === index) {
-            return {
-              expanded: false,
-              value: `${item.id}`,
-              clicked: false, // reset the clicked property to false
-            };
-          } else {
-            return buttonState;
-          }
-        })
-      )
-    }
-  >
+              <div
+                className="close-button"
+                onClick={() =>
+                  setButtonState(
+                    buttonState.map((buttonState, index) => {
+                      if (i === index) {
+                        return {
+                          expanded: false,
+                          value: `${item.id}`,
+                          clicked: false, // reset the clicked property to false
+                        };
+                      } else {
+                        return buttonState;
+                      }
+                    })
+                  )
+                }
+              >
                 <p>X</p>
               </div>
             </div>
@@ -128,18 +134,14 @@ const ButtonLg = () => {
           {item.list.map((listItem) => (
             <div
               key={listItem}
+              value={listItem}
               className={`button-expand-list ${
                 buttonState[i].expanded ? "" : "hidden"
               }`}
+              onClick={() => handleStateValue(i, listItem)}
             >
               <div className="button-expand-list-text-container">
-                <p
-                  className="button-expand-list-text"
-                  htmlFor={listItem}
-                  name={listItem}
-                >
-                  {listItem}
-                </p>
+                <p className="button-expand-list-text">{listItem}</p>
               </div>
             </div>
           ))}
