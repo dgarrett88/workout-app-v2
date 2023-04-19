@@ -11,22 +11,35 @@ import {
 } from "../../services/api";
 
 const ButtonLg = () => {
+
   const menuItems = arrays.menuItems;
   const dynamicRefs = useRef([]);
 
+  // Empty array, used to store mapped state objects
   let buttonStateContent = [];
+
+  // Mapping over top level of json creating 2 objects
   const buttonStateContentMap = menuItems.map((item) => {
+
+    // Pushing key value pairs to buttonStateContent array
     buttonStateContent.push({
       expanded: false,
       value: `${item.id}`,
     });
   });
 
+  // State to track which button is has been expanded (clicked)
   const [buttonState, setButtonState] = useState(buttonStateContent);
 
-  const handleClick = (i) => {
+  const handleExpandClick = (i) => {
+
+    // Mapping over buttonState
     const updateButtonInState = buttonState.map((buttonState, index) => {
       if (i === index) {
+
+        // Spreading values of clicked button state,
+        // checking to see if current button state is expanded
+        // if not change expanded value
         const newButtonState = {
           ...buttonState,
           expanded: !buttonState.expanded,
@@ -36,21 +49,16 @@ const ButtonLg = () => {
         return buttonState;
       }
     });
+    // Set new state with updated values
     setButtonState(updateButtonInState);
   };
-
-  const menuSplit = menuItems.map((list) => list.list);
-
-  const bodyPartList = menuSplit[0];
-  const equipmentList = menuSplit[1];
-  console.log("BODY PART LIST ---- ", bodyPartList);
-  console.log("EQUIPMENT LIST ---- ", equipmentList);
 
   useEffect(() => {
     console.log("BUTTON STATE ---- ", buttonState);
     console.log("DYNAMIC REF 0 ---- ", dynamicRefs.current[0]);
     console.log("DYNAMIC REF 1 ---- ", dynamicRefs.current[1]);
 
+    // Changing classes to hide inactive content
     if (buttonState[0].expanded === true && buttonState[1].expanded === false) {
       dynamicRefs.current[1].className = "hidden";
     } else if (
@@ -78,7 +86,8 @@ const ButtonLg = () => {
             buttonState[i].expanded ? "active" : "inactive"
           } `}
           ref={(el) => (dynamicRefs.current[i] = el)}
-          onClick={() => handleClick(i)}
+          onClick={() => handleExpandClick(i)}
+          // onClick={buttonState.expanded ? null : `${handleClick(i)}`}
         >
           <div
             className={`button-expand-list-header ${
