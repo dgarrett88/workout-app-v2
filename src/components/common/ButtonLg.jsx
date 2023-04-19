@@ -31,7 +31,7 @@ const ButtonLg = () => {
   // State to track which button is has been expanded (clicked)
   const [buttonState, setButtonState] = useState(buttonStateContent);
 
-  const handleExpandClick = (i) => {
+  const handleClick = (i) => {
 
     // Mapping over buttonState
     const updateButtonInState = buttonState.map((buttonState, index) => {
@@ -42,7 +42,8 @@ const ButtonLg = () => {
         // if not change expanded value
         const newButtonState = {
           ...buttonState,
-          expanded: !buttonState.expanded,
+          expanded: true,
+          clicked: true, // set a new property to track if the button has been clicked
         };
         return newButtonState;
       } else {
@@ -52,6 +53,8 @@ const ButtonLg = () => {
     // Set new state with updated values
     setButtonState(updateButtonInState);
   };
+
+
 
   useEffect(() => {
     console.log("BUTTON STATE ---- ", buttonState);
@@ -86,8 +89,8 @@ const ButtonLg = () => {
             buttonState[i].expanded ? "active" : "inactive"
           } `}
           ref={(el) => (dynamicRefs.current[i] = el)}
-          onClick={() => handleExpandClick(i)}
-          // onClick={buttonState.expanded ? null : `${handleClick(i)}`}
+          // onClick={() => handleClick(i)}
+          onClick={buttonState[i].clicked ? null : () => handleClick(i)} // disable click event if button has been clicked
         >
           <div
             className={`button-expand-list-header ${
@@ -95,7 +98,24 @@ const ButtonLg = () => {
             }`}
           >
             <div className="close-button-container">
-              <div className="close-button">
+            <div
+    className="close-button"
+    onClick={() =>
+      setButtonState(
+        buttonState.map((buttonState, index) => {
+          if (i === index) {
+            return {
+              expanded: false,
+              value: `${item.id}`,
+              clicked: false, // reset the clicked property to false
+            };
+          } else {
+            return buttonState;
+          }
+        })
+      )
+    }
+  >
                 <p>X</p>
               </div>
             </div>
