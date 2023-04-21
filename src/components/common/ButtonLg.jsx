@@ -35,9 +35,7 @@ const ButtonLg = () => {
     // Mapping over buttonState
     const updateButtonInState = buttonState.map((buttonState, index) => {
       if (i === index) {
-        // Spreading values of clicked button state,
-        // checking to see if current button state is expanded
-        // if not change expanded value
+
         const newButtonState = {
           ...buttonState,
           expanded: true,
@@ -52,6 +50,7 @@ const ButtonLg = () => {
     setButtonState(updateButtonInState);
   };
 
+
   const handleStateValue = (i, value) => {
     if (selected.includes(value)) {
       setSelected(selected.filter((item) => item !== value));
@@ -63,7 +62,6 @@ const ButtonLg = () => {
   useEffect(() => {
     console.log("BUTTON STATE ---- ", buttonState);
     console.log("DYNAMIC REF 0 ---- ", dynamicRefs.current[0]);
-    console.log("DYNAMIC REF 0 DEEP ---- ", dynamicRefs.current[0]);
     console.log("DYNAMIC REF 1 ---- ", dynamicRefs.current[1]);
     console.log("SELECTED", selected);
 
@@ -81,6 +79,10 @@ const ButtonLg = () => {
     ) {
       dynamicRefs.current[0].className = "button-lg inactive";
       dynamicRefs.current[1].className = "button-lg inactive";
+    }
+
+    if  (selected.includes.value) {
+      
     }
   }, [buttonState, selected]);
 
@@ -135,9 +137,10 @@ const ButtonLg = () => {
             <div
               key={listItem}
               value={listItem}
-              className={`button-expand-list ${
+              // clicked={}
+              className={`button-expand-list listItem ${
                 buttonState[i].expanded ? "" : "hidden"
-              }`}
+              } ${selected.includes(listItem) ? "clicked" : ""}`}
               onClick={() => handleStateValue(i, listItem)}
             >
               <div className="button-expand-list-text-container">

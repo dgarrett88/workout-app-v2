@@ -1,37 +1,36 @@
 @use "../abstracts" as *;
 
 @keyframes expandWidth {
-    from {
-        width: 40vw;
-    }
-    to {
-        width: 88vw;
-    }
+  from {
+    width: 40vw;
+  }
+  to {
+    width: 88vw;
+  }
 }
 
 @keyframes expandHeight {
-    from {
-        height: auto;
-    }
-    to {
-        height: 60vh;
-    }
+  from {
+    height: auto;
+  }
+  to {
+    height: 60vh;
+  }
 }
 
 @keyframes fadeIn1 {
-    0% {
-        display: none !important;
-        opacity: 0%;
-    }
-    1% {
-        display: flex;
-        opacity: 0%;
-    }
-    100% {
-        display: flex;
-        opacity: 100%;
-    }
-
+  0% {
+    display: none !important;
+    opacity: 0%;
+  }
+  1% {
+    display: flex;
+    opacity: 0%;
+  }
+  100% {
+    display: flex;
+    opacity: 100%;
+  }
 }
 
 @keyframes fadeOut {
@@ -73,8 +72,6 @@
     // justify-content: space-evenly;
     overflow: hidden;
 
-   
-
     .button-lg {
       display: flex;
       margin: 0 0 0 1vw;
@@ -91,7 +88,7 @@
       &:nth-child(1) {
         margin: 0 auto 0 6vw;
       }
-    &:nth-child(2) {
+      &:nth-child(2) {
         margin: 0 6vw 0 auto;
       }
 
@@ -171,12 +168,29 @@
       text-decoration: none;
       text-shadow: 0px 1px 0px #283966;
 
-      &:hover {
-        background: linear-gradient(to bottom, #552828 5%, #7892c2 100%);
-        background-color: red;
+      // &:hover {
+      //   background: linear-gradient(to bottom, #552828 5%, #7892c2 100%);
+      //   background-color: red;
+      // }
+
+      &.clicked {
+        width: 98%;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.15rem;
+
+        box-shadow: 0px 0px 0px 2px #e67e22;
+        background: linear-gradient(to bottom, #e67e22 5%, #c0392b 100%);
+        background-color: #e67e22;
+        border-radius: 10px;
+        border: 1px solid #d35400;
+        cursor: pointer;
+        color: #ffffff;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #7f1d1d;
       }
-
-
 
       .button-expand-list-text-container {
         width: 95%;
@@ -187,12 +201,10 @@
           padding: 0;
         }
       }
-
-
     }
 
     .active {
-    animation: expandWidth 250ms ease-out forwards;
+      animation: expandWidth 250ms ease-out forwards;
     }
 
     .inactive {
@@ -210,5 +222,3 @@
   animation: fadeIn1 500ms ease-in-out forwards;
   animation-delay: 500ms;
 }
-
-
