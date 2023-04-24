@@ -1,25 +1,20 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 import arrays from "../../assets/json/arrays.json"
 
-const ButtonSm = () => {
+const ButtonSm = ({selected}) => {
 
-  const menuItems = arrays.menuItems
-console.log("SMALL BTN MENU ITEMS", menuItems)
+  const [selectedState, setSelectedState] = useState([selected]);
+
+  // console.log("BTN SM SELECTED DATA", selected)
 
 
   
   return (
   <div className="button-sm-container">
-    {
-      menuItems.map((item) => (
-        <div key={item.id} className="button-sm">
-          <p>{item.bodyParts}</p>
-
-          <h5>diz a aych 5</h5>
-        </div>
-      ))
-    }
+   <div className="button-sm">
+    
+   </div>
   </div>
   );
 };

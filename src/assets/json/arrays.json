@@ -2,7 +2,7 @@
     
         "menuItems": [
         {
-                "id": "bodyParts",
+                "id": "BODY PARTS",
                 "title": "Body Part",
                 "image": "../img/muscle.svg",
                 "list": [  
@@ -19,7 +19,7 @@
                             ]   
         },
         {
-                "id": "equipment",
+                "id": "EQUIPMENT",
                 "title": "Equipment",
                 "image": "../img/dumbell.svg",
                 "list": [

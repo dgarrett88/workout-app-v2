@@ -8,6 +8,10 @@ import './sass/index.scss';
 import Home from "./pages/home/Home";
 import ButtonLg from "./components/common/ButtonLg";
 
+// Services
+import {allExercises} from './services/api';
+import arrays from './assets/json/arrays.json';
+
 
 
 function App() {
@@ -17,7 +21,9 @@ function App() {
   return (
     <div className="App">
 
-      <Home />
+      <Home 
+      apiData={allExercises}
+      arrays={arrays} />
       {/* <ButtonLg /> */}
      
     </div>

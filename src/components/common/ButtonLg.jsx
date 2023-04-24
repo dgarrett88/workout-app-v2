@@ -2,15 +2,9 @@ import React, { useRef, useEffect, useState } from "react";
 
 import arrays from "../../assets/json/arrays.json";
 
-import {
-  allExercises,
-  getByName,
-  getBodyPart,
-  getTargetMuscle,
-  getEquipment,
-} from "../../services/api";
 
-const ButtonLg = () => {
+
+const ButtonLg = ({apiData, onSelectedChange}) => {
   const [selected, setSelected] = useState([]);
 
   const menuItems = arrays.menuItems;
@@ -58,6 +52,11 @@ const ButtonLg = () => {
       setSelected([...selected, value]);
     }
   };
+
+  useEffect(() => {
+    // Call the onSelectedChange function passed from the parent with the new selected state value
+    onSelectedChange(selected);
+  }, [selected, onSelectedChange]);
 
   useEffect(() => {
     console.log("BUTTON STATE ---- ", buttonState);
