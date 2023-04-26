@@ -15,7 +15,6 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
 
   // Mapping over top level of json creating 2 objects
   const buttonStateContentMap = menuItems.map((item) => {
-    // Pushing key value pairs to buttonStateContent array
     buttonStateContent.push({
       expanded: false,
       value: `${item.id}`,
@@ -30,10 +29,11 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
     const updateButtonInState = buttonState.map((buttonState, index) => {
       if (i === index) {
 
+        // Setting button properties to track when it has been clicked and expanded
         const newButtonState = {
           ...buttonState,
           expanded: true,
-          clicked: true, // set a new property to track if the button has been clicked
+          clicked: true, 
         };
         return newButtonState;
       } else {
@@ -44,7 +44,7 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
     setButtonState(updateButtonInState);
   };
 
-
+  // Adds and removes values from selected array on click
   const handleStateValue = (i, value) => {
     if (selected.includes(value)) {
       setSelected(selected.filter((item) => item !== value));
@@ -53,18 +53,13 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
     }
   };
 
+  // Call the onSelectedChange function passed from the parent with the new selected state value
   useEffect(() => {
-    // Call the onSelectedChange function passed from the parent with the new selected state value
     onSelectedChange(selected);
   }, [selected, onSelectedChange]);
 
+  // Changing classes to hide inactive content
   useEffect(() => {
-    console.log("BUTTON STATE ---- ", buttonState);
-    console.log("DYNAMIC REF 0 ---- ", dynamicRefs.current[0]);
-    console.log("DYNAMIC REF 1 ---- ", dynamicRefs.current[1]);
-    console.log("SELECTED", selected);
-
-    // Changing classes to hide inactive content
     if (buttonState[0].expanded === true && buttonState[1].expanded === false) {
       dynamicRefs.current[1].className = "hidden";
     } else if (
@@ -79,11 +74,7 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
       dynamicRefs.current[0].className = "button-lg inactive";
       dynamicRefs.current[1].className = "button-lg inactive";
     }
-
-    if  (selected.includes.value) {
-      
-    }
-  }, [buttonState, selected]);
+  }, [buttonState]);
 
   return (
     <div className="button-lg-container">
@@ -96,7 +87,6 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
             buttonState[i].expanded ? "active" : "inactive"
           } `}
           ref={(el) => (dynamicRefs.current[i] = el)}
-          // onClick={() => handleClick(i)}
           onClick={buttonState[i].clicked ? null : () => handleClick(i)} // disable click event if button has been clicked
         >
           <div

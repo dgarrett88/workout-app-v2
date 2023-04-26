@@ -4,7 +4,7 @@ import axios from "axios";
 // GET ALL EXERCISES
 export async function allExercises() {
   try {
-    const response = await axios.get(`${config.baseURL}`, {
+    return await axios.get(`${config.baseURL}`, {
       headers: config.headers,
     });
     

@@ -9,7 +9,7 @@ import SearchBar from "../../components/common/SearchBar";
 import logo from "../../assets/img/logo-mobile.svg"
 
 
-const Home = () => {
+const Home = ({apiData}) => {
     const [selected, setSelected] = useState([]);
 
     const handleSelectedChange = (newSelected) => {
@@ -34,8 +34,13 @@ const Home = () => {
             </section>
             <p className="article-bottom">Click to choose your workout</p>
         </article>
-            <ButtonLg onSelectedChange={handleSelectedChange} />
-            <ButtonSm selected={selected} />
+            <ButtonLg 
+                onSelectedChange={handleSelectedChange} 
+            />
+            <ButtonSm 
+                selected={selected}
+                apiData={apiData} 
+            />
         
     </div>
 );

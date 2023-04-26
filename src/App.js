@@ -6,7 +6,6 @@ import './sass/index.scss';
 
 // Page Imports
 import Home from "./pages/home/Home";
-import ButtonLg from "./components/common/ButtonLg";
 
 // Services
 import {allExercises} from './services/api';
@@ -16,15 +15,28 @@ import arrays from './assets/json/arrays.json';
 
 function App() {
 
+  const [apiData, setApiData] = useState([])
 
+
+  useEffect(() => {
+    async function loadEndpoint() {
+      const res = await allExercises()
+      const data = res.data;
+      setApiData(data);
+      // console.log("APP.JS API DATA - ", data)
+    }
+    loadEndpoint()
+  }, [])
+
+  // console.log("APP.JS API DATA - ", apiData)
 
   return (
     <div className="App">
 
       <Home 
-      apiData={allExercises}
+      apiData={apiData}
       arrays={arrays} />
-      {/* <ButtonLg /> */}
+     
      
     </div>
   );
