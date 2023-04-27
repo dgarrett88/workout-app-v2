@@ -1,8 +1,32 @@
 @use "../abstracts" as *;
 
-.button-sm {
-    height: 152px;
-    width: 158px;
-    border: 1px solid $darkBlue;
+.button-sm-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid red;
+
+  .btn-sm {
+    width: 87.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem 0rem;
+
     border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom, #648db6 5%, #283655 100%);
+    background-size: cover;
+    background-color: #648db6;
+    box-shadow: 0px 0px 0px 2px #648db6;
+    border: 1px solid #4e6096;
+    color: #ffffff;
+    text-shadow: 0px 1px 0px #283966;
+
+    &:nth-child(1) {
+        margin-top: .5rem;
+    }
+  }
 }
