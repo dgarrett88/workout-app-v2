@@ -1,31 +1,28 @@
 import React, {useState, useEffect} from "react";
-import axios from "axios";
 
 const ButtonSm = ({selected, apiData}) => {
-
-  const [selectedState, setSelectedState] = useState([]);
-
-  const [data, setData] = useState([apiData])
+  const [selectedState, setSelectedState] = useState(selected);
+  const [data, setData] = useState(apiData);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(apiData);
-        setData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
+    setData(apiData);
   }, [apiData]);
   
-console.log("BTN-SM DATA STATE", data);
+  useEffect(() => {
+    setSelectedState(selected);
+  }, [selected]);
+
+  console.log("BTN-SM DATA STATE", data);
+  console.log("BTN-SM SELECTED STATE", selectedState);
   
   return (
-  <div className="button-sm-container">
-    hello
-  </div>
+    <div className="button-sm-container">
+      {data.map((myData) => (
+        <div key={myData.id} className="btn-sm">
+          <p>{myData.name}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 
