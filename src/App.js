@@ -23,12 +23,10 @@ function App() {
       const res = await allExercises()
       const data = res.data;
       setApiData(data);
-      // console.log("APP.JS API DATA - ", data)
     }
     loadEndpoint()
   }, [])
 
-  // console.log("APP.JS API DATA - ", apiData)
 
   return (
     <div className="App">

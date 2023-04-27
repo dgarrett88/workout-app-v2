@@ -11,7 +11,6 @@ const ButtonSm = ({selected, apiData}) => {
     const fetchData = async () => {
       try {
         const response = await fetch(apiData);
-        // console.log("CUM", response.data)
         setData(response.data);
       } catch (error) {
         console.error(error);
@@ -21,8 +20,7 @@ const ButtonSm = ({selected, apiData}) => {
     fetchData();
   }, [apiData]);
   
-console.log("FKN DATA", data);
-console.log("GGGGGGGGGGGGGGGGG", apiData);
+console.log("BTN-SM DATA STATE", data);
   
   return (
   <div className="button-sm-container">
