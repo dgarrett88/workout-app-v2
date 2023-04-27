@@ -1,35 +1,41 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-const ButtonSm = ({selected, apiData}) => {
+const ButtonSm = ({ selected, apiData }) => {
   const [selectedState, setSelectedState] = useState(selected);
   const [data, setData] = useState(apiData);
   const [filteredData, setFilteredData] = useState([]);
+  const [submitClicked, setSubmitClicked] = useState(false);
 
   useEffect(() => {
     setData(apiData);
   }, [apiData]);
-  
+
   useEffect(() => {
     setSelectedState(selected);
   }, [selected]);
 
   useEffect(() => {
-    const filtered = data.filter((myData) =>
-      selectedState.includes(myData.bodyPart) || selectedState.includes(myData.equipment)
+    const filtered = data.filter(
+      (item) =>
+        selectedState.includes(item.bodyPart) ||
+        selectedState.includes(item.equipment)
     );
     setFilteredData(filtered);
-  }, [selectedState, data]);
+    setSubmitClicked(false);
+  }, [data, selectedState]);
 
   console.log("BTN-SM DATA STATE", data);
   console.log("BTN-SM SELECTED STATE", selectedState);
-  
+
   return (
     <div className="button-sm-container">
-      {filteredData.map((myData) => (
-        <div key={myData.id} className="btn-sm">
-          <p>{myData.name}</p>
-        </div>
-      ))}
+      <button className="submit-btn" onClick={() => setSubmitClicked(true)}>GET WORKOUTS</button>
+      {submitClicked &&
+        filteredData.map((myData) => (
+          <div key={myData.id} className="btn-sm">
+            <p>{myData.name}</p>
+          </div>
+        ))}
     </div>
   );
 };
