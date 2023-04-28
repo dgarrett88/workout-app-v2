@@ -13,7 +13,7 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
   // Empty array, used to store mapped state objects
   let buttonStateContent = [];
 
-  // Mapping over top level of json creating 2 objects
+  // Mapping over top level of json creating 2 properties to track
   const buttonStateContentMap = menuItems.map((item) => {
     buttonStateContent.push({
       expanded: false,
@@ -21,7 +21,7 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
     });
   });
 
-  // State to track which button is has been expanded (clicked)
+  // State to track which button has been expanded (clicked)
   const [buttonState, setButtonState] = useState(buttonStateContent);
 
   const handleClick = (i) => {
@@ -53,7 +53,7 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
     }
   };
 
-  // Call the onSelectedChange function passed from the parent with the new selected state value
+  // Passes 'selected' state to parent component (Home.jsx)
   useEffect(() => {
     onSelectedChange(selected);
   }, [selected, onSelectedChange]);
