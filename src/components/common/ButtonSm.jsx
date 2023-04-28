@@ -17,7 +17,7 @@ const ButtonSm = ({ selected, apiData }) => {
   useEffect(() => {
     const filtered = data.filter(
       (item) =>
-        selectedState.includes(item.bodyPart) ||
+        selectedState.includes(item.bodyPart) &&
         selectedState.includes(item.equipment)
     );
     setFilteredData(filtered);
@@ -26,6 +26,7 @@ const ButtonSm = ({ selected, apiData }) => {
 
   console.log("BTN-SM DATA STATE", data);
   console.log("BTN-SM SELECTED STATE", selectedState);
+  console.log("BTN-SM FILTERED DATA", filteredData);
 
   return (
     <div className="button-sm-container">
@@ -33,7 +34,16 @@ const ButtonSm = ({ selected, apiData }) => {
       {submitClicked &&
         filteredData.map((myData) => (
           <div key={myData.id} className="btn-sm">
-            <p>{myData.name}</p>
+            <div className="btn-sm-left">
+              <p>{myData.bodyPart}</p>
+              <p>{myData.equipment}</p>
+            </div>
+            <div className="btn-sm-mid">
+              <p>{myData.name}</p>
+            </div>
+            <div className="btn-sm-right">
+              
+            </div>
           </div>
         ))}
     </div>
