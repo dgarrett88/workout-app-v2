@@ -29,7 +29,7 @@ const ButtonSm = ({ selected, apiData }) => {
 
   return (
     <div className="button-sm-container">
-      <button className="submit-btn" onClick={() => setSubmitClicked(true)}>GET WORKOUTS</button>
+      <div className="submit-btn" onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
       {submitClicked &&
         filteredData.map((myData) => (
           <div key={myData.id} className="btn-sm">

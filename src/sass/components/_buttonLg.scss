@@ -80,6 +80,7 @@
       box-shadow: 0px 0px 0px 2px 0.3 #648db6;
       border: 0.05rem solid #4e6096;
       border-radius: 10px;
+      
 
       transition: width 500ms ease-out;
 
@@ -111,6 +112,20 @@
         border-top: 1px solid $darkBlue;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+
+
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        background-image: linear-gradient(to bottom, #648db6 5%, #283655 100%);
+        background-size: cover;
+        background-color: #648db6;
+        box-shadow: 0px 0px 0px 2px #648db6;
+        border: 1px solid #4e6096;
+        color: #ffffff;
+        text-shadow: 0px 1px 0px #283966;
+
+
 
         p {
           font-size: 1.25rem;
