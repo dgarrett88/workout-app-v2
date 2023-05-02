@@ -4,7 +4,8 @@
 
     body {
         font-family: $mainFont;
-        background-color: $lightBlue;
+        background-color: #1c1a1a;
+        color: rgb(224, 214, 214);
     }
 
     .home-container {
@@ -21,15 +22,15 @@
             margin: 1rem;
         }
 
-        article {
+        .main {
             width: 100vw;
             display: flex;
             flex-direction: column;
             justify-content: center;
             margin: 1rem 0 1rem 0;
 
-            .article-top,
-            .article-bottom {
+            .main-text-top,
+            .main-text-bottom {
                 display: flex;
                 justify-content: center;
                 margin: 0;
@@ -37,7 +38,7 @@
             }
 
             
-            .article-center {
+            .main-text-center {
                 display: inline-flex;
 
                 p{
@@ -49,7 +50,7 @@
                     height: 1px;
                     margin: auto;
                     margin-right: 0.4rem;
-                    background-color: $darkBlue;
+                    background-color: white;
                     border: 0px solid white;
 
                 }
@@ -58,7 +59,7 @@
                     height: 1px;
                     margin: auto;
                     margin-left: 0.4rem;
-                    background-color: $darkBlue;
+                    background-color: white;
                     border: 0px solid white;
                 }
                 

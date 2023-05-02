@@ -12,8 +12,14 @@ import logo from "../../assets/img/logo-mobile.svg"
 const Home = ({apiData}) => {
     const [selected, setSelected] = useState([]);
 
+    const[buttonExpandState, setButtonExpandState] = useState([])
+
     const handleSelectedChange = (newSelected) => {
         setSelected(newSelected);
+    }
+
+    const handleExpandChange = (expanded) => {
+        setButtonExpandState(expanded)
     }
 
 
@@ -22,24 +28,26 @@ const Home = ({apiData}) => {
         <header className="header-logo">
             <img src={logo} alt="logo" />
         </header>
-        <section>
+        <div>
             <SearchBar />
-        </section>
-        <article>
-            <p className="article-top">Search for body parts, muscles or equipment</p>
-            <section className="article-center">
+        </div>
+        <div className="main">
+            <p className="main-text-top">Search for body parts, muscles or equipment</p>
+            <div className="main-text-center">
                 <hr className="left-row" />
                 <p>or</p>
                 <hr className="right-row" />
-            </section>
-            <p className="article-bottom">Click to choose your workout</p>
-        </article>
+            </div>
+            <p className="main-text-bottom">Click to choose your workout</p>
+        </div>
             <ButtonLg 
                 onSelectedChange={handleSelectedChange} 
+                onButtonExpandChange={handleExpandChange}
             />
             <ButtonSm 
                 selected={selected}
                 apiData={apiData} 
+                buttonExpandState={buttonExpandState}
             />
         
     </div>

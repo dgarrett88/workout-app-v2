@@ -4,7 +4,7 @@ import arrays from "../../assets/json/arrays.json";
 
 
 
-const ButtonLg = ({apiData, onSelectedChange}) => {
+const ButtonLg = ({apiData, onSelectedChange, onButtonExpandChange}) => {
   const [selected, setSelected] = useState([]);
 
   const menuItems = arrays.menuItems;
@@ -57,6 +57,10 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
   useEffect(() => {
     onSelectedChange(selected);
   }, [selected, onSelectedChange]);
+
+  useEffect(() => {
+    onButtonExpandChange(buttonState)
+  }, [buttonState])
 
   // Changing classes to hide inactive content
   useEffect(() => {
@@ -118,6 +122,9 @@ const ButtonLg = ({apiData, onSelectedChange}) => {
             </div>
             <div className="button-expand-header-title-container">
               <h4>{item.id}</h4>
+            </div>
+            <div className="spacer">
+
             </div>
           </div>
           {/* TEST */}

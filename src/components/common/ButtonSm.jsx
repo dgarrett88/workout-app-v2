@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ButtonSm = ({ selected, apiData }) => {
+const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
   const [selectedState, setSelectedState] = useState(selected);
   const [data, setData] = useState(apiData);
   const [filteredData, setFilteredData] = useState([]);
@@ -30,7 +30,7 @@ const ButtonSm = ({ selected, apiData }) => {
 
   return (
     <div className="button-sm-container">
-      <div className="submit-btn" onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
+      <div className={`submit-btn ${buttonExpandState.expanded ? 'hidden' : ''}`} onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
       {submitClicked &&
         filteredData.map((myData) => (
           <div key={myData.id} className="btn-sm">
