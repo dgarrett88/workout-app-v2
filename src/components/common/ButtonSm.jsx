@@ -30,7 +30,9 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
 
   return (
     <div className="button-sm-container">
-      <div className={`submit-btn ${buttonExpandState.expanded ? 'hidden' : ''}`} onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
+      <div className={`submit-btn ${
+                buttonExpandState.expanded ? "hidden" : ""
+              }`} onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
       {submitClicked &&
         filteredData.map((myData) => (
           <div key={myData.id} className="btn-sm">
