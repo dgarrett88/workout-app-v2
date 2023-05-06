@@ -24,6 +24,12 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
     setSubmitClicked(false);
   }, [data, selectedState]);
 
+  const buttonSort = (i) => {
+    if (buttonExpandState[i].expanded) {
+
+    }
+  }
+
   console.log("BTN-SM DATA STATE", data);
   console.log("BTN-SM SELECTED STATE", selectedState);
   console.log("BTN-SM FILTERED DATA", filteredData);
@@ -31,8 +37,8 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
   return (
     <div className="button-sm-container">
       <div className={`submit-btn ${
-                buttonExpandState.expanded ? "hidden" : ""
-              }`} onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
+        buttonExpandState.some((item) => item.expanded) ? "hidden" : ""
+      }`} onClick={() => setSubmitClicked(true)}>GET WORKOUTS</div>
       {submitClicked &&
         filteredData.map((myData) => (
           <div key={myData.id} className="btn-sm">

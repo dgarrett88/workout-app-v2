@@ -1,11 +1,11 @@
-<svg width="138" height="137" viewBox="0 0 138 137" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="142" height="141" viewBox="0 0 142 141" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Group 1">
-<rect id="Rectangle 18" x="69.4334" y="20.4251" width="67" height="12.66" rx="6.33" transform="rotate(45 69.4334 20.4251)" stroke="#DDDDDD" stroke-width="5"/>
-<rect id="Rectangle 19" x="83.0401" y="16.182" width="53" height="12" rx="6" transform="rotate(45 83.0401 16.182)" stroke="#DDDDDD" stroke-width="5"/>
-<rect id="Rectangle 20" x="29.5679" y="60.2905" width="67" height="12.6561" rx="6.32805" transform="rotate(45 29.5679 60.2905)" stroke="#DDDDDD" stroke-width="5"/>
-<rect id="Rectangle 21" x="25.0573" y="74.1647" width="53" height="12" rx="6" transform="rotate(45 25.0573 74.1647)" stroke="#DDDDDD" stroke-width="5"/>
-<rect id="Rectangle 22" x="79.2924" y="48.2139" width="10" height="43" transform="rotate(45 79.2924 48.2139)" stroke="#DDDDDD" stroke-width="5"/>
-<path id="Rectangle 23" d="M108.496 33.1525L104.529 37.1197L97.4576 30.0487L101.425 26.0814C103.377 24.1288 106.543 24.1288 108.496 26.0814C110.449 28.0341 110.449 31.1999 108.496 33.1525Z" stroke="#DDDDDD" stroke-width="5"/>
-<path id="Rectangle 24" d="M30.7142 96.7921L37.7852 103.863L33.9179 107.731C31.9653 109.683 28.7994 109.683 26.8468 107.731C24.8942 105.778 24.8942 102.612 26.8468 100.659L30.7142 96.7921Z" stroke="#DDDDDD" stroke-width="5"/>
+<rect id="Rectangle 18" x="72.1405" y="21.0109" width="68" height="13.66" rx="6.83" transform="rotate(45 72.1405 21.0109)" stroke="#DDDDDD" stroke-width="4"/>
+<rect id="Rectangle 19" x="86.4543" y="16.0607" width="54" height="13" rx="6.5" transform="rotate(45 86.4543 16.0607)" stroke="#DDDDDD" stroke-width="4"/>
+<rect id="Rectangle 20" x="30.8608" y="62.2906" width="68" height="13.6561" rx="6.82805" transform="rotate(45 30.8608 62.2906)" stroke="#DDDDDD" stroke-width="4"/>
+<rect id="Rectangle 21" x="25.6431" y="76.8718" width="54" height="13" rx="6.5" transform="rotate(45 25.6431 76.8718)" stroke="#DDDDDD" stroke-width="4"/>
+<rect id="Rectangle 22" x="81.2924" y="49.5068" width="11" height="44" transform="rotate(45 81.2924 49.5068)" stroke="#DDDDDD" stroke-width="4"/>
+<path id="Rectangle 23" d="M112.971 33.3848L108.65 37.7056L100.872 29.9274L105.193 25.6066C107.341 23.4587 110.823 23.4587 112.971 25.6066C115.119 27.7545 115.119 31.2369 112.971 33.3848Z" stroke="#DDDDDD" stroke-width="4"/>
+<path id="Rectangle 24" d="M30.5929 100.206L38.371 107.985L34.1501 112.205C32.0023 114.353 28.5198 114.353 26.372 112.205C24.2241 110.058 24.2241 106.575 26.372 104.427L30.5929 100.206Z" stroke="#DDDDDD" stroke-width="4"/>
 </g>
 </svg>
