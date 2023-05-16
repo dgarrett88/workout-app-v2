@@ -32,6 +32,7 @@
       align-items: center;
       flex-direction: column;
       aspect-ratio: 1/1;
+      // height: 17.5vh;
       width: 40vw;
       border: 1px solid rgb(80, 78, 78);
       border-radius: 6px;
@@ -54,11 +55,13 @@
         height: 7.625rem;
         display: grid;
         place-items: center;
+       
 
         img {
           margin-top: 0.25rem;
-          min-width: 6.25rem;
-          min-height: 6.25rem;
+          width: fit-content;
+          height: fit-content;
+          
         }
       }
 
@@ -87,10 +90,10 @@
       z-index: 999;
       display: flex;
       align-items: center;
-      margin: 0.3rem 0.3rem;
+      // margin: 0.3rem 0.3rem;
       width: 95.5%;
       height: 100px;
-      margin-top: .5rem;
+      padding-top: .5rem;
       color: #ffffff;
       background-color: #1c1a1a;
       padding-bottom: 1.2rem;

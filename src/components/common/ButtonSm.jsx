@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import chevron from '../../assets/img/chevron.png'
+
 const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
   const [selectedState, setSelectedState] = useState(selected);
   const [data, setData] = useState(apiData);
@@ -24,11 +26,7 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
     setSubmitClicked(false);
   }, [data, selectedState]);
 
-  const buttonSort = (i) => {
-    if (buttonExpandState[i].expanded) {
-
-    }
-  }
+  
 
   console.log("BTN-SM DATA STATE", data);
   console.log("BTN-SM SELECTED STATE", selectedState);
@@ -50,7 +48,7 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
               <p>{myData.name}</p>
             </div>
             <div className="btn-sm-right">
-              
+              <img src={chevron} alt="chevron" />
             </div>
           </div>
         ))}

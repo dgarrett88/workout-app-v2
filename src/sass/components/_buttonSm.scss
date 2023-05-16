@@ -26,6 +26,34 @@
         margin-top: .5rem;
     }
 
+    .btn-sm {
+        display: flex;
+        width: 85vw;
+        border: solid 1px #dddddd;
+        border-radius: 5px;
+        margin: 0.5rem 0;
+
+        
+        .btn-sm-left {
+            border: solid 1px #dddddd;
+            width: auto;
+            padding: 0 1rem;
+        }
+        .btn-sm-mid {
+            border: solid 1px #dddddd;
+            width: 75%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            // text-align: center;
+        }
+        .btn-sm-right {
+            border: solid 1px #dddddd;
+            width: auto;
+        }
+    }
+
 
 }
 
