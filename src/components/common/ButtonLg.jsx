@@ -2,9 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 
 import arrays from "../../assets/json/arrays.json";
 
-
-
-const ButtonLg = ({apiData, onSelectedChange, onButtonExpandChange}) => {
+const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
   const [selected, setSelected] = useState([]);
 
   const menuItems = arrays.menuItems;
@@ -28,12 +26,11 @@ const ButtonLg = ({apiData, onSelectedChange, onButtonExpandChange}) => {
     // Mapping over buttonState
     const updateButtonInState = buttonState.map((buttonState, index) => {
       if (i === index) {
-
         // Setting button properties to track when it has been clicked and expanded
         const newButtonState = {
           ...buttonState,
           expanded: true,
-          clicked: true, 
+          clicked: true,
         };
         return newButtonState;
       } else {
@@ -53,14 +50,14 @@ const ButtonLg = ({apiData, onSelectedChange, onButtonExpandChange}) => {
     }
   };
 
-  // Passes 'selected' state to parent component (Home.jsx)
+  // Passing 'selected' & 'buttonState' state to parent component (Home.jsx)
   useEffect(() => {
     onSelectedChange(selected);
   }, [selected, onSelectedChange]);
 
   useEffect(() => {
-    onButtonExpandChange(buttonState)
-  }, [buttonState])
+    onButtonExpandChange(buttonState);
+  }, [buttonState]);
 
   // Changing classes to hide inactive content
   useEffect(() => {
@@ -123,9 +120,7 @@ const ButtonLg = ({apiData, onSelectedChange, onButtonExpandChange}) => {
             <div className="button-expand-header-title-container">
               <h4>{item.id}</h4>
             </div>
-            <div className="spacer">
-
-            </div>
+            <div className="spacer"></div>
           </div>
           {/* TEST */}
 
