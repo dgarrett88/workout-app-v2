@@ -27,7 +27,7 @@ function App() {
     loadEndpoint()
   }, [])
 
-  console.log("APP.JS API DATA - ", apiData)
+  // console.log("APP.JS API DATA - ", apiData)
 
   return (
     <div className="App">
