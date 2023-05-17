@@ -7,16 +7,20 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [submitClicked, setSubmitClicked] = useState(false);
   const dynamicRefs = useRef([]);
-  let buttonStateContent = [];
+  const buttonStateContent = useRef([]);
 
+  // Update if api data changes (shouldn't happen after first call)
   useEffect(() => {
     setData(apiData);
   }, [apiData]);
 
+  // Update 'selected' state based on which 'btn-lg' has been clicked
   useEffect(() => {
     setSelectedState(selected);
   }, [selected]);
 
+  // Filtering through api data and storing objects that match
+  // specified conditions to 'filteredData' state 
   useEffect(() => {
     const filtered = data.filter(
       (item) =>
@@ -27,48 +31,36 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
     setSubmitClicked(false);
   }, [data, selectedState]);
 
+  // Initialize buttonStateContent array when filteredData changes
   useEffect(() => {
-    // Initialize buttonStateContent array when filteredData changes
-    buttonStateContent = filteredData.map((item) => ({
+    buttonStateContent.current = filteredData.map((item) => ({
       expanded: false,
       value: `${item.name}`,
     }));
-    setButtonState(buttonStateContent);
+    setButtonState(buttonStateContent.current);
   }, [filteredData]);
 
-  const [buttonState, setButtonState] = useState(buttonStateContent);
+  // State to store trackable attributes (expanded, clicked)
+  const [buttonState, setButtonState] = useState(buttonStateContent.current);
 
+  // Maps over buttonState and sets trackable attributes (expanded, clicked)
   const handleClick = (i) => {
-    // Mapping over buttonState
-    const updateButtonInState = buttonState.map((buttonState, index) => {
-      if (i === index) {
-        // Setting button properties to track when it has been clicked and expanded
-        const newButtonState = {
-          ...buttonState,
-          clicked: true,
-        };
-  
-        // Toggle the expanded attribute
-        if (buttonState.clicked) {
-          newButtonState.expanded = false;
-        } else {
-          newButtonState.expanded = true;
+    setButtonState((prevButtonState) => {
+      const updatedButtonState = prevButtonState.map((button, index) => {
+        if (i === index) {
+          return {
+            ...button,
+            expanded: !button.expanded,
+            clicked: true,
+          };
         }
-  
-        return newButtonState;
-      } else {
-        return buttonState;
-      }
+        return button;
+      });
+      return updatedButtonState;
     });
-    // Set new state with updated values
-    setButtonState(updateButtonInState);
   };
-  
 
-  useEffect(() => {
-    console.log(buttonState);
-  }, [buttonState]);
-
+  // Capitalize first letter of each word
   function capitalizeBody(text) {
     const words = text.split(" ");
     const capitalizeLeBodyWords = words.map(
