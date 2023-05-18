@@ -20,7 +20,7 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
   }, [selected]);
 
   // Filtering through api data and storing objects that match
-  // specified conditions to 'filteredData' state 
+  // specified conditions to 'filteredData' state
   useEffect(() => {
     const filtered = data.filter(
       (item) =>
@@ -86,20 +86,32 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
             key={i}
             ref={(el) => (dynamicRefs.current[i] = el)}
             onClick={() => handleClick(i)}
-            className="btn-sm"
+            className="btn-sm-mapped-container"
           >
-            <div className="btn-sm-left">
-              <p>{capitalizeBody(myData.bodyPart)}</p>
-              <p>{capitalizeBody(myData.equipment)}</p>
+            <div className="btn-sm">
+              <div className="btn-sm-left">
+                <p>{capitalizeBody(myData.bodyPart)}</p>
+                <p>{capitalizeBody(myData.equipment)}</p>
+              </div>
+              <div className="btn-sm-right">
+                <div className="top-spacer"></div>
+                <div className="btn-sm-mid">
+                  <p>{capitalizeBody(myData.name)}</p>
+                </div>
+                <div className="btn-sm-chevron">
+                  <FaChevronDown />
+                </div>
+              </div>
             </div>
-            <div className="btn-sm-right">
-              <div className="top-spacer"></div>
-              <div className="btn-sm-mid">
-                <p>{capitalizeBody(myData.name)}</p>
+            <div className={`${buttonState[i].expanded ? "animation-frame" : "close-animation-frame"}`}>
+            <div className={`${buttonState[i].expanded ? "content-container" : "close-animation"}`}>
+              <div
+                className={`${buttonState[i].expanded ? "expanding" : "expanding"}`} //yes pointless
+              >
+                <img src={myData.gifUrl} alt={myData.name} />
               </div>
-              <div className="btn-sm-chevron">
-                <FaChevronDown />
-              </div>
+            </div>
+
             </div>
           </div>
         ))}
