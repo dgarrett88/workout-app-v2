@@ -21,7 +21,7 @@
   }
 }
 
-@keyframes borderChange {
+@keyframes borderFlat {
   0% {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -33,12 +33,23 @@
   }
 }
 
+@keyframes borderRound {
+  0% {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  100% {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
 .button-sm-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // border: 1px solid red;
 
   .submit-btn {
     height: 2rem;
@@ -67,6 +78,19 @@
     margin: 0.5rem 0;
     overflow: hidden;
     border-radius: 5px;
+    animation: borderRound 340ms forwards;
+  }
+
+  .btn-sm-open {
+    position: relative;
+    display: flex;
+    width: 87.5vw;
+    border: solid 1px #dddddd;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-radius: 5px;
+    animation: borderFlat 10ms forwards;
+  }
 
     .btn-sm-left {
       border-right: solid 1px #dddddd;
@@ -110,9 +134,10 @@
         }
       }
     }
-  }
+  
 
-// -----BTN-SM-END---------------------------
+
+// -----OPEN-ANIMATION-FRAME---------------------------
 
   .animation-frame {
     -webkit-transition: max-height 350ms; 
@@ -135,24 +160,22 @@
       overflow: hidden;
       animation: expand 350ms ease-out forwards;
 
-      .expanding {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0.9rem 0;
         margin-top: 0;
-        padding-top: .9rem;
+        padding: .9rem 0;
 
         img {
           height: 90%;
           width: 90%;
         }
-      }
     }
   }
 
+//   CLOSE-ANIMATION-FRAME---------------------------
   .close-animation-frame {
-    // animation: closeAnimationFrame 350ms 50ms ease-out forwards;
     transform: translateY(-0.55rem);
     overflow: hidden;
     -webkit-transition: max-height 350ms; 
@@ -166,9 +189,6 @@
         animation: retract 350ms ease-out forwards;
         border: 1px solid #dddddd;
         border-top: none;
-      //   transform: translateY(-22.2rem);
-  
-      .expanding {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -178,7 +198,6 @@
             height: 90%;
             width: 90%;
           }
-        }
       }
   }
 }

@@ -88,7 +88,7 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
             onClick={() => handleClick(i)}
             className="btn-sm-mapped-container"
           >
-            <div className="btn-sm">
+            <div className={`${!buttonState[i].expanded ? "btn-sm" : "btn-sm-open"}`}>
               <div className="btn-sm-left">
                 <p>{capitalizeBody(myData.bodyPart)}</p>
                 <p>{capitalizeBody(myData.equipment)}</p>
@@ -105,11 +105,8 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
             </div>
             <div className={`${buttonState[i].expanded ? "animation-frame" : "close-animation-frame"}`}>
             <div className={`${buttonState[i].expanded ? "content-container" : "close-animation"}`}>
-              <div
-                className={`${buttonState[i].expanded ? "expanding" : "expanding"}`} //yes pointless
-              >
+        
                 <img src={myData.gifUrl} alt={myData.name} />
-              </div>
             </div>
 
             </div>
