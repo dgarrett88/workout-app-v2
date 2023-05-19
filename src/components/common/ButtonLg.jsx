@@ -72,8 +72,8 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
       buttonState[1].expanded === false &&
       buttonState[0].expanded === false
     ) {
-      dynamicRefs.current[0].className = "button-lg inactive";
-      dynamicRefs.current[1].className = "button-lg inactive";
+      dynamicRefs.current[0].className = "button-lg";
+      dynamicRefs.current[1].className = "button-lg";
     }
   }, [buttonState]);
 
@@ -84,16 +84,14 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
           key={i}
           type="button"
           // disabled
-          className={`button-lg ${item.id} ${
-            buttonState[i].expanded ? "active" : "inactive"
+          className={`${
+            buttonState[i].expanded ? "button-lg-expanded active" : "button-lg"
           } `}
           ref={(el) => (dynamicRefs.current[i] = el)}
           onClick={buttonState[i].clicked ? null : () => handleClick(i)} // disable click event if button has been clicked
-        >
+          >
           <div
-            className={`button-expand-list-header ${
-              buttonState[i].expanded ? "" : "hidden"
-            }`}
+            className={`${buttonState[i].expanded ? "button-expand-list-header" : "button-expand-list-header"}`}
           >
             <div className="close-button-container">
               <div
@@ -129,9 +127,11 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
               key={listItem}
               value={listItem}
               // clicked={}
-              className={`button-expand-list listItem ${
-                buttonState[i].expanded ? "" : "hidden"
+              className={`${
+                // ---------------------------------WORKING HERE-----------------------------------
+                buttonState[i].expanded ? "button-expand-list" : "button-expand-list"
               } ${selected.includes(listItem) ? "clicked" : ""}`}
+              // ---------------------------------WORKING HERE-----------------------------------
               onClick={() => handleStateValue(i, listItem)}
             >
               <div className="button-expand-list-text-container">

@@ -103,8 +103,8 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
                 </div>
               </div>
             </div>
-            <div className={`${buttonState[i].expanded ? "animation-frame" : "close-animation-frame"}`}>
-            <div className={`${buttonState[i].expanded ? "content-container" : "close-animation"}`}>
+            <div className={`${buttonState[i].expanded ? "open-animation-frame" : "close-animation-frame"}`}>
+            <div className={`${buttonState[i].expanded ? "open-animation" : "close-animation"}`}>
         
                 <img src={myData.gifUrl} alt={myData.name} />
             </div>

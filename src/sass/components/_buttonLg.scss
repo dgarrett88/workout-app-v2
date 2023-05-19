@@ -1,18 +1,125 @@
 @use "../abstracts" as *;
 
-@keyframes expandWidth {
+@keyframes opacityShow {
   from {
-    width: 40vw;
-    max-height: 10vh;
+    opacity: 0;
   }
   to {
-    width: 87.5vw;
-    height: 69vh;
-
-    border: 1px solid rgba(80, 78, 78, 0);
+    opacity: 100;
   }
 }
 
+@keyframes opacityHide {
+  from {
+    opacity: 100;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes heightToZero {
+  from {
+    max-height: 11rem;
+  }
+  to {
+    max-height: 0;
+  }
+}
+
+@mixin buttonExpandList {
+  width: 95%;
+  min-height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0.15rem;
+  overflow-y: scroll;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid #f2f2f2;
+  color: #ffffff;
+
+  &.clicked {
+    background: linear-gradient(to bottom, #5aa469 5%, #3e6c4c 100%);
+    background-color: #5aa469;
+    box-shadow: 0px 0px 0px 2px #3e6c4c;
+    border: 1px solid #3e6c4c;
+    color: #ffffff;
+    text-shadow: 0px 1px 0px #3e6c4c;
+    transition: all 0.2s ease;
+  }
+}
+
+@mixin buttonExpandListHeader {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // margin: 0.3rem 0.3rem;
+  width: 95.5%;
+  height: 40px;
+  padding-top: 0.5rem;
+  color: #ffffff;
+  background-color: #1c1a1a;
+  padding-bottom: 0.5rem;
+
+  .close-button-container {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #f2f2f2;
+
+    .close-button {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    p {
+      display: flex;
+      // color: red;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .button-expand-header-title-container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  .spacer {
+    width: 10%;
+  }
+}
+
+@mixin btnLgTop {
+  height: 7.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // animation: opacityHide 500ms forwards 200ms linear;
+
+  img {
+    margin-top: 0.25rem;
+    width: fit-content;
+    height: fit-content;
+  }
+}
 
 @media (max-width: 576.98px) {
   .button-lg-container {
@@ -31,14 +138,72 @@
       margin: 0 0 0 1vw;
       align-items: center;
       flex-direction: column;
-      aspect-ratio: 1/1;
-      // height: 17.5vh;
       width: 40vw;
-      border: 1px solid rgb(80, 78, 78);
+      // border: 1px solid rgb(80, 78, 78);
       border-radius: 6px;
-      
+      height: 18vh;
+      max-height: 18vh;
+      transition: all 300ms ease-out;
+      opacity: 0;
 
-      transition: width 500ms ease-out;
+      &:nth-child(1) {
+        margin: 0 auto 0 6vw;
+      }
+      &:nth-child(2) {
+        margin: 0 6vw 0 auto;
+      }
+
+      .button-lg-top {
+        @include btnLgTop();
+      }
+
+      .button-lg-bottom {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        // border-top: 1px solid rgb(80, 78, 78);
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        opacity: 0;
+        animation: opacityShow 350ms forwards 300ms linear;
+        p {
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin: 0.5rem;
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      .button-expand-list-header {
+        overflow: hidden;
+        @include buttonExpandListHeader();
+        animation: opacityHide 100ms forwards 300ms linear;
+        -webkit-transition: max-height 350ms; 
+        -moz-transition: max-height 350ms; 
+        -ms-transition: max-height 350ms; 
+        -o-transition: max-height 350ms; 
+        transition: max-height 350ms;  
+        max-height: 0;
+        
+      }
+      
+      .button-expand-list {
+        overflow: hidden;
+        @include buttonExpandList();
+        animation: opacityHide 1000ms forwards 300ms linear;
+        
+        max-height: 0;
+      }
+    }
+
+    .button-lg-expanded {
+      overflow-y: scroll;
+      transition: all 300ms ease-out;
+      width: 87.5vw;
+      height: 69vh;
+      max-height: 69vh;
 
       &::-webkit-scrollbar {
         width: 0px;
@@ -52,17 +217,7 @@
       }
 
       .button-lg-top {
-        height: 7.625rem;
-        display: grid;
-        place-items: center;
-       
-
-        img {
-          margin-top: 0.25rem;
-          width: fit-content;
-          height: fit-content;
-          
-        }
+        @include btnLgTop();
       }
 
       .button-lg-bottom {
@@ -70,9 +225,7 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        border-top: 1px solid rgb(80, 78, 78);
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
+
         p {
           font-size: 1.25rem;
           font-weight: 700;
@@ -81,99 +234,19 @@
           text-align: center;
         }
       }
-    }
-
-     // ---START EXPANDED HEADER----------------
-    .button-expand-list-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      // margin: 0.3rem 0.3rem;
-      width: 95.5%;
-      height: 100px;
-      padding-top: .5rem;
-      color: #ffffff;
-      background-color: #1c1a1a;
-      padding-bottom: 1.2rem;
-
-      .close-button-container {
-        width: 10%;
-        display: flex;
-        justify-content: center;
-        border-radius: 6px;
-        cursor: pointer;
-        text-decoration: none;
-        border: 1px solid #f2f2f2;
-        
-
-        .close-button {
-          width: 2rem;
-          height: 2rem;
-        }
-
-        p {
-          display: flex;
-          // color: red;
-          justify-content: center;
-          align-items: center;
-          width: 2rem;
-          height: 2rem;
-          margin: 0;
-          padding: 0;
-        }
-      }
-      
-
-      .button-expand-header-title-container {
-        // color: green;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        
-
-        h4 {
-          margin: 0;
-        }
+      .button-expand-list-header {
+        @include buttonExpandListHeader();
+        max-height: 4rem;
       }
 
-      .spacer {
-        width: 10%;
-      }
-    }
-
-    // ---END EXPANDED HEADER----------------
-
-    .button-expand-list {
-      width: 95%;
-      min-height: 2.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0.5rem 0.15rem;
-      overflow: scroll;
-      
-
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      border: 1px solid #f2f2f2;
-      color: #ffffff;
-
-      
-      
-      &.clicked {
-        background: linear-gradient(to bottom, #5aa469 5%, #3e6c4c 100%);
-        background-color: #5aa469;
-        box-shadow: 0px 0px 0px 2px #3e6c4c;
-        border: 1px solid #3e6c4c;
-        color: #ffffff;
-        text-shadow: 0px 1px 0px #3e6c4c;
-      
-        transition: all 0.2s ease; /* add transition property to the clicked state */
+      .button-expand-list {
+        @include buttonExpandList();
+        max-height: 4rem;
       }
 
+      // ---START EXPANDED HEADER----------------
+
+      // ---END EXPANDED HEADER----------------
 
       .button-expand-list-text-container {
         width: 95%;
@@ -185,19 +258,10 @@
         }
       }
     }
+  }
 
-    .active {
-      animation: expandWidth 250ms ease-out forwards;
-
-      overflow-y: scroll;
-    }
-
-    .inactive {
-      //  animation: expandWidth 250ms ease-out reverse;
-
-      // transition-delay: 2s;
-      animation: fadeIn1 250ms forwards ease-out;
-    }
+  .active {
+    overflow-y: scroll;
   }
 
   .hidden {

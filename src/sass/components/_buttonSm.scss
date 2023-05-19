@@ -71,14 +71,16 @@
   }
 // -----BTN-SM-START---------------------------
   .btn-sm {
-    position: relative;
+    // position: relative;
     display: flex;
+    // justify-content: center;
     width: 87.5vw;
     border: solid 1px #dddddd;
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
     overflow: hidden;
     border-radius: 5px;
     animation: borderRound 340ms forwards;
+    // align-items: center;
   }
 
   .btn-sm-open {
@@ -94,7 +96,7 @@
 
     .btn-sm-left {
       border-right: solid 1px #dddddd;
-      width: auto;
+      width: 30%;
       padding: 0 1rem;
     }
 
@@ -123,6 +125,7 @@
           margin: 0;
         }
       }
+
       .btn-sm-chevron {
         width: auto;
         display: flex;
@@ -139,18 +142,18 @@
 
 // -----OPEN-ANIMATION-FRAME---------------------------
 
-  .animation-frame {
+  .open-animation-frame {
     -webkit-transition: max-height 350ms; 
     -moz-transition: max-height 350ms; 
     -ms-transition: max-height 350ms; 
     -o-transition: max-height 350ms; 
     transition: max-height 350ms; 
-    max-height: 22.2rem;
+    max-height: 36rem;
     
     transform: translateY(-0.55rem);
     overflow: hidden;
 
-    .content-container {
+    .open-animation {
       width: 87.5vw;
       border: 1px solid #dddddd;
       border-radius: 5px;
@@ -163,8 +166,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0.9rem 0;
-        margin-top: 0;
         padding: .9rem 0;
 
         img {
@@ -184,6 +185,8 @@
     -o-transition: max-height 350ms; 
     transition: max-height 350ms;  
     max-height: 0;
+    width: 100vw;
+    
 
     .close-animation {
         animation: retract 350ms ease-out forwards;
@@ -192,7 +195,8 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          margin: 0.9rem 0;
+          margin: 0.9rem auto;
+          width: 87.5vw;
   
           img {
             height: 90%;
