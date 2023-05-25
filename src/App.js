@@ -24,7 +24,7 @@ function App() {
       const data = res.data;
       setApiData(data);
     }
-    // loadEndpoint()
+    loadEndpoint()
   }, [])
 
   // console.log("APP.JS API DATA - ", apiData)

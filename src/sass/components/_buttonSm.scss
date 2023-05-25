@@ -64,6 +64,9 @@
     text-decoration: none;
     border: 1px solid #dddddd;
     color: #ffffff;
+
+    opacity: 0;
+        animation: opacityShow 400ms forwards 400ms linear;
   }
 
   &:nth-child(1) {

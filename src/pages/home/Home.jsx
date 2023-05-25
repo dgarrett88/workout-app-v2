@@ -29,7 +29,7 @@ const Home = ({apiData}) => {
             <img src={logo} alt="logo" />
         </header>
         <div>
-            <SearchBar />
+            <SearchBar apiData={apiData} />
         </div>
         <div className="main">
             <p className="main-text-top">Search for body parts, muscles or equipment</p>

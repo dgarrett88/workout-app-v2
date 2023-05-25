@@ -85,7 +85,7 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
           type="button"
           // disabled
           className={`${
-            buttonState[i].expanded ? "button-lg-expanded active" : "button-lg"
+            buttonState[i].expanded ? "button-lg-expanded" : "button-lg"
           } `}
           ref={(el) => (dynamicRefs.current[i] = el)}
           onClick={buttonState[i].clicked ? null : () => handleClick(i)} // disable click event if button has been clicked

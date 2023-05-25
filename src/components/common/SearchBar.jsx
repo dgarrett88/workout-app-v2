@@ -1,10 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({ apiData }) => {
   const [searchValue, setSearchValue] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const [screenSize, setScreenSize] = useState('')
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth); // Adjust the breakpoint as needed
+      console.log(window.innerWidth);
+    };
+    
+    handleResize(); // Check initial screen size
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSearchChange = (e) => {
-    setSearchValue(e.target.value);
+    const inputValue = e.target.value;
+    setSearchValue(inputValue);
+
+    const filteredResults = apiData.filter((item) => {
+      const { bodyPart, equipment, name, target } = item;
+      const searchLower = inputValue.toLowerCase();
+      return (
+        (bodyPart && bodyPart.toLowerCase().includes(searchLower)) ||
+        (equipment && equipment.toLowerCase().includes(searchLower)) ||
+        (name && name.toLowerCase().includes(searchLower)) ||
+        (target && target.toLowerCase().includes(searchLower))
+      );
+    });
+
+    setFilteredData(filteredResults);
   };
 
   return (
@@ -27,9 +55,15 @@ const SearchBar = () => {
           </svg>
         </button>
       </div>
+      {filteredData.length > 0 && (
+        <ul className="suggestions">
+          {filteredData.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
 
 export default SearchBar;
-
