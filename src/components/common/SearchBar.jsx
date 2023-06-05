@@ -8,14 +8,14 @@ const SearchBar = ({ apiData }) => {
   useEffect(() => {
     const handleResize = () => {
       setScreenSize(window.innerWidth); // Adjust the breakpoint as needed
-      console.log(window.innerWidth);
+      console.log(screenSize);
     };
     
     handleResize(); // Check initial screen size
     
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [screenSize]);
 
   const handleSearchChange = (e) => {
     const inputValue = e.target.value;
@@ -25,15 +25,15 @@ const SearchBar = ({ apiData }) => {
       const { bodyPart, equipment, name, target } = item;
       const searchLower = inputValue.toLowerCase();
       return (
-        (bodyPart && bodyPart.toLowerCase().includes(searchLower)) ||
-        (equipment && equipment.toLowerCase().includes(searchLower)) ||
-        (name && name.toLowerCase().includes(searchLower)) ||
-        (target && target.toLowerCase().includes(searchLower))
+        
+        (name && name.toLowerCase().includes(searchLower)) 
       );
     });
 
     setFilteredData(filteredResults);
   };
+
+
 
   return (
     <div className="wrapper">
@@ -42,10 +42,17 @@ const SearchBar = ({ apiData }) => {
           id="searchQueryInput"
           type="text"
           name="searchQueryInput"
-          placeholder="Search"
+          placeholder="Search..."
           value={searchValue}
           onChange={handleSearchChange}
         />
+         {filteredData.length > 0 && (
+        <ul className="suggestions">
+          {filteredData.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      )}
         <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
           <svg width="24px" height="24px" viewBox="0 0 24 24">
             <path
@@ -55,13 +62,7 @@ const SearchBar = ({ apiData }) => {
           </svg>
         </button>
       </div>
-      {filteredData.length > 0 && (
-        <ul className="suggestions">
-          {filteredData.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
-      )}
+     {/* lkfdvkdjsfvkdjsckjsdhvkfjdv */}
     </div>
   );
 };
