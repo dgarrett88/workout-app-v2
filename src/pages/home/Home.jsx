@@ -12,14 +12,20 @@ import logo from "../../assets/img/logo-mobile.svg"
 const Home = ({apiData}) => {
     const [selected, setSelected] = useState([]);
 
-    const[buttonExpandState, setButtonExpandState] = useState([])
+    const[buttonExpandState, setButtonExpandState] = useState([]);
+
+    const [selectedSuggestion, setSelectedSuggestion] = useState([]);
 
     const handleSelectedChange = (newSelected) => {
         setSelected(newSelected);
     }
 
     const handleExpandChange = (expanded) => {
-        setButtonExpandState(expanded)
+        setButtonExpandState(expanded);
+    }
+
+    const handleSuggestionSelect = (suggestion) => {
+        setSelectedSuggestion(suggestion);
     }
 
 
@@ -29,10 +35,13 @@ const Home = ({apiData}) => {
             <img src={logo} alt="logo" />
         </header>
         <div>
-            <SearchBar apiData={apiData} />
+            <SearchBar 
+            apiData={apiData} 
+            searchSuggestion={handleSuggestionSelect}
+            />
         </div>
         <div className="main">
-            <p className="main-text-top">Search for body parts, muscles or equipment</p>
+            <p className="main-text-top">Search by name</p>
             <div className="main-text-center">
                 <hr className="left-row" />
                 <p>or</p>
@@ -46,6 +55,7 @@ const Home = ({apiData}) => {
             />
             <ButtonSm 
                 selected={selected}
+                searchSuggestion={selectedSuggestion}
                 apiData={apiData} 
                 buttonExpandState={buttonExpandState}
             />

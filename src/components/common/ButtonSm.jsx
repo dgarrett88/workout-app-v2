@@ -1,49 +1,90 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
-const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
-  const [selectedState, setSelectedState] = useState(selected);
-  const [data, setData] = useState(apiData);
-  const [filteredData, setFilteredData] = useState([]);
-  const [submitClicked, setSubmitClicked] = useState(false);
+import { capitalizeBody } from "../../services/capitalize";
+
+const ButtonSm = ({ selected, apiData, buttonExpandState, searchSuggestion }) => {
+  const [selectedState, setSelectedState] = useState(selected); // Which values have been selected from btn-lg
+  const [data, setData] = useState(apiData); // The entire api data
+  const [filteredData, setFilteredData] = useState([]); // Filtered results from btn-lg selections
+  const [searchFiltered, setSearchFiltered] = useState([]); // Filtered results from search suggestions
+  const [submitClicked, setSubmitClicked] = useState(false); // Tracks if submit button has been clicked
+  const [loading, setLoading] = useState(false);
   const dynamicRefs = useRef([]);
   const buttonStateContent = useRef([]);
 
-  // Update if api data changes (shouldn't happen after first call)
   useEffect(() => {
     setData(apiData);
   }, [apiData]);
 
-  // Update 'selected' state based on which 'btn-lg' has been clicked
   useEffect(() => {
     setSelectedState(selected);
   }, [selected]);
 
-  // Filtering through api data and storing objects that match
-  // specified conditions to 'filteredData' state
-  useEffect(() => {
-    const filtered = data.filter(
-      (item) =>
-        selectedState.includes(item.bodyPart) &&
-        selectedState.includes(item.equipment)
+
+// Tells this component which values 
+// from btn-lg have been selected
+// filters api data using selected values
+const filterTheData = () => {
+  const filtered = data.filter(
+    (item) =>
+    selectedState.includes(item.bodyPart) &&
+    selectedState.includes(item.equipment)
     );
+    
+    // if values have been selected clear search bar results
+    if (filtered.length > 0) {
+      setSearchFiltered([]);
+    }
+    // setSearchFiltered([]);
     setFilteredData(filtered);
+
+}
+  useEffect(() => {
+    setLoading(true);
+    filterTheData();
+    setLoading(false);
     setSubmitClicked(false);
   }, [data, selectedState]);
 
-  // Initialize buttonStateContent array when filteredData changes
-  useEffect(() => {
-    buttonStateContent.current = filteredData.map((item) => ({
-      expanded: false,
-      value: `${item.name}`,
-    }));
-    setButtonState(buttonStateContent.current);
-  }, [filteredData]);
+  // Search suggestion
+useEffect(() => {
+    setLoading(true);
+    if(searchSuggestion.some(item => item.trim() !== '')) {
+      const matchingResults = data.filter(item =>
+        searchSuggestion.includes(item.bodyPart) ||
+        searchSuggestion.includes(item.equipment) ||
+        searchSuggestion.includes(item.name)
+      );
+      if (matchingResults.length > 0) {
+        setFilteredData([]);
+      }
+      setSearchFiltered(matchingResults);
+    }
+    setLoading(false);
+  }, [searchSuggestion, data]);
 
-  // State to store trackable attributes (expanded, clicked)
+
+
+  useEffect(() => {
+    const createButtonStates = (dataSet) => {
+      return dataSet.map((item) => ({
+        expanded: false,
+        value: `${item.name}`,
+      }));
+    };
+    
+    if (filteredData.length > 0) {
+      buttonStateContent.current = createButtonStates(filteredData);
+    } else if (searchFiltered.length > 0) {
+      buttonStateContent.current = createButtonStates(searchFiltered);
+    }
+
+    setButtonState(buttonStateContent.current);
+  }, [filteredData, searchFiltered]);
+
   const [buttonState, setButtonState] = useState(buttonStateContent.current);
 
-  // Maps over buttonState and sets trackable attributes (expanded, clicked)
   const handleClick = (i) => {
     setButtonState((prevButtonState) => {
       const updatedButtonState = prevButtonState.map((button, index) => {
@@ -60,15 +101,8 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
     });
   };
 
-  // Capitalize first letter of each word
-  function capitalizeBody(text) {
-    const words = text.split(" ");
-    const capitalizeLeBodyWords = words.map(
-      (word) => word.charAt(0).toUpperCase() + word.slice(1)
-    );
-    const results = capitalizeLeBodyWords.join(" ");
-    return results;
-  }
+  const dataToRender = searchFiltered.length > 0 ? searchFiltered : filteredData;
+  const shouldRender = searchFiltered.length > 0 ? true : submitClicked;
 
   return (
     <div className="button-sm-container">
@@ -76,19 +110,22 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
         className={`submit-btn ${
           buttonExpandState.some((item) => item.expanded) ? "hidden" : ""
         }`}
-        onClick={() => setSubmitClicked(true)}
+        onClick={() => {
+          setSubmitClicked(true)
+          filterTheData()
+        }}
       >
         GET WORKOUTS
       </div>
-      {submitClicked &&
-        filteredData.map((myData, i) => (
+      {!loading && shouldRender &&
+        dataToRender.map((myData, i) => (
           <div
             key={i}
             ref={(el) => (dynamicRefs.current[i] = el)}
             onClick={() => handleClick(i)}
             className="btn-sm-mapped-container"
           >
-            <div className={`${!buttonState[i].expanded ? "btn-sm" : "btn-sm-open"}`}>
+            <div className={`${buttonState[i]?.expanded ? "btn-sm" : "btn-sm-open"}`}>
               <div className="btn-sm-left">
                 <p>{capitalizeBody(myData.bodyPart)}</p>
                 <p>{capitalizeBody(myData.equipment)}</p>
@@ -103,12 +140,10 @@ const ButtonSm = ({ selected, apiData, buttonExpandState }) => {
                 </div>
               </div>
             </div>
-            <div className={`${buttonState[i].expanded ? "open-animation-frame" : "close-animation-frame"}`}>
-            <div className={`${buttonState[i].expanded ? "open-animation" : "close-animation"}`}>
-        
+            <div className={`${buttonState[i]?.expanded ? "open-animation-frame" : "close-animation-frame"}`}>
+              <div className={`${buttonState[i]?.expanded ? "open-animation" : "close-animation"}`}>
                 <img src={myData.gifUrl} alt={myData.name} />
-            </div>
-
+              </div>
             </div>
           </div>
         ))}

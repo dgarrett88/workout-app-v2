@@ -1,42 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-const SearchBar = ({ apiData }) => {
+import { capitalizeBody } from "../../services/capitalize";
+
+const SearchBar = ({ apiData, searchSuggestion }) => {
   const [searchValue, setSearchValue] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [screenSize, setScreenSize] = useState('')
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenSize(window.innerWidth); // Adjust the breakpoint as needed
-      console.log(screenSize);
-    };
-    
-    handleResize(); // Check initial screen size
-    
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [screenSize]);
+  const [selectedSuggestion, setSelectedSuggestion] = useState([]);
+  const [lastFilteredData, setLastFilteredData] = useState([]);
+  const wrapperRef = useRef(null);
 
   const handleSearchChange = (e) => {
     const inputValue = e.target.value;
     setSearchValue(inputValue);
 
+    if (inputValue === "") {
+      setFilteredData([]);
+      return;
+    }
+
     const filteredResults = apiData.filter((item) => {
       const { bodyPart, equipment, name, target } = item;
       const searchLower = inputValue.toLowerCase();
       return (
-        
-        (name && name.toLowerCase().includes(searchLower)) 
+        (name && name.toLowerCase().includes(searchLower))
+        // (bodyPart && bodyPart.toLowerCase().includes(searchLower)) ||
+        // (equipment && equipment.toLowerCase().includes(searchLower)) ||
+        // (target && target.toLowerCase().includes(searchLower))
       );
     });
 
     setFilteredData(filteredResults);
+    setLastFilteredData(filteredResults);
   };
 
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setFilteredData([]);
+    }
+  };
 
+  const handleFocus = () => {
+    if (searchValue !== "") {
+      setFilteredData(lastFilteredData);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSelectedSuggestion((prevSelectedSuggestion) => [
+      ...prevSelectedSuggestion,
+      suggestion,
+    ]);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    searchSuggestion(selectedSuggestion);
+  }, [selectedSuggestion, searchSuggestion]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" ref={wrapperRef}>
       <div className="searchBar">
         <input
           id="searchQueryInput"
@@ -45,14 +73,8 @@ const SearchBar = ({ apiData }) => {
           placeholder="Search..."
           value={searchValue}
           onChange={handleSearchChange}
+          onFocus={handleFocus}
         />
-         {filteredData.length > 0 && (
-        <ul className="suggestions">
-          {filteredData.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
-      )}
         <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
           <svg width="24px" height="24px" viewBox="0 0 24 24">
             <path
@@ -62,7 +84,35 @@ const SearchBar = ({ apiData }) => {
           </svg>
         </button>
       </div>
-     {/* lkfdvkdjsfvkdjsckjsdhvkfjdv */}
+
+      {filteredData.length > 0 && (
+        <div className="suggestions">
+          {filteredData.map((item) => {
+            const capitalizedItem = capitalizeBody(item.name);
+            const index = capitalizedItem
+              .toLowerCase()
+              .indexOf(searchValue.toLowerCase());
+            const beforeStr = capitalizedItem.slice(0, index);
+            const matchStr = capitalizedItem.slice(
+              index,
+              index + searchValue.length
+            );
+            const afterStr = capitalizedItem.slice(index + searchValue.length);
+
+            return (
+              <p
+                className="suggestion"
+                key={item.id}
+                onClick={() => handleSuggestionClick(item.name)} // Pass the suggestion to the click handler
+              >
+                {beforeStr}
+                <span style={{ color: "#42ef2c" }}>{matchStr}</span>
+                {afterStr}
+              </p>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

@@ -82,7 +82,7 @@
     margin: 0.5rem auto;
     overflow: hidden;
     border-radius: 5px;
-    animation: borderRound 340ms forwards;
+    animation: borderFlat 10ms forwards;
     // align-items: center;
   }
 
@@ -94,7 +94,7 @@
     margin: 0.5rem 0;
     overflow: hidden;
     border-radius: 5px;
-    animation: borderFlat 10ms forwards;
+    animation: borderRound 340ms forwards;
   }
 
     .btn-sm-left {
@@ -188,7 +188,13 @@
     -o-transition: max-height 350ms; 
     transition: max-height 350ms;  
     max-height: 0;
-    width: 100vw;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin: 0.9rem auto;
+    width: 87.5vw;
+    
     
 
     .close-animation {
