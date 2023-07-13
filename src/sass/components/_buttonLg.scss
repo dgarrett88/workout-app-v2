@@ -9,41 +9,15 @@
   }
 }
 
-@keyframes opacityHide {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 
-@keyframes dNone {
-  from {
-    display: flex;
-  }
-  to {
-    display: none !important;
-  }
-}
-
-@keyframes heightToZero {
-  from {
-    max-height: 11rem;
-  }
-  to {
-    max-height: 0;
-  }
-}
-
-@mixin buttonExpandList {
-  width: 95%;
+.button-expand-list {
+  width: 94.8%;
   min-height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0.5rem 0.3rem;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
@@ -51,24 +25,20 @@
   color: #ffffff;
 
   &.clicked {
-    // background: linear-gradient(to bottom, #5aa469 5%, #3e6c4c 100%);
-    // background-color: #5aa469;
     box-shadow: 0px 0px 9px 0px #42ef2c;
-    border: 1px solid #3cc12a;
+    border: 1px solid #3ce925;
     color: #ffffff;
-    // text-shadow: 0px 1px 0px #3e6c4c;
-    transition: all 0.2s ease;
+    transition: all 300ms ease;
   }
 }
 
-@mixin buttonExpandListHeader {
+.button-expand-list-header {
   position: sticky;
   top: 0;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
-  // margin: 0.3rem 0.3rem;
   width: 96.5%;
   height: 40px;
   padding-top: 0.5rem;
@@ -84,6 +54,7 @@
     cursor: pointer;
     text-decoration: none;
     border: 1px solid #f2f2f2;
+    margin-left: 0.25rem;
 
     .close-button {
       width: 2rem;
@@ -92,7 +63,6 @@
 
     p {
       display: flex;
-      // color: red;
       justify-content: center;
       align-items: center;
       width: 2rem;
@@ -116,12 +86,11 @@
   }
 }
 
-@mixin btnLgTop {
+.btn-lg-top {
   height: 7.625rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  // animation: opacityHide 500ms forwards 200ms linear;
 
   img {
     margin-top: 0.25rem;
@@ -130,11 +99,12 @@
   }
 }
 
-@media (max-width: 576.98px) {
+// @media (max-width: 576.98px) {
   .button-lg-container {
     font-family: $mainFont;
     font-size: 20px;
     width: 100vw;
+    max-width: 500px;
     padding: 0;
     margin: auto;
     display: flex;
@@ -145,33 +115,30 @@
 
     .button-lg {
       display: flex;
-      margin: 0 0 0 1vw;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
       width: 40vw;
-      // border: 1px solid rgb(80, 78, 78);
-      border-radius: 6px;
-      height: 18vh;
-      max-height: 18vh;
-      // transform: scale(110%);
-      // transition: all 300ms ease-out;
-      // opacity: .10;
-      // animation: opacityShow 500ms forwards ease all;
+      max-width: 230px;
+      // height: 18vh;
+      // max-height: 18vh;
+      // margin: 0 0 0 1vw;
 
       &:nth-child(1) {
-        margin: 0 .5rem 0 auto;
+        margin: 0 0.5rem 0 auto;
         opacity: 0;
         animation: opacityShow 400ms forwards 200ms linear;
       }
       &:nth-child(2) {
-        margin: 0 auto 0 .5rem;
+        margin: 0 auto 0 0.5rem;
         opacity: 0;
         animation: opacityShow 400ms forwards 300ms linear;
       }
 
       .button-lg-top {
-        @include btnLgTop();
-        
+        height: 7.625rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .button-lg-bottom {
@@ -179,11 +146,6 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        // border-top: 1px solid rgb(80, 78, 78);
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-        // opacity: 0;
-        // animation: opacityShow 350ms forwards 300ms linear;
         p {
           font-size: 1.25rem;
           font-weight: 700;
@@ -194,56 +156,33 @@
       }
 
       .button-expand-list-header {
-        overflow: hidden;
-        @include buttonExpandListHeader();
-        opacity: 0;
         display: none;
-        // -webkit-transition: max-height 350ms; 
-        // -moz-transition: max-height 350ms; 
-        // -ms-transition: max-height 350ms; 
-        // -o-transition: max-height 350ms; 
-        // transition: max-height 350ms;  
-        // max-height: 0;
-        
       }
-      
+
       .button-expand-list {
-        overflow: hidden;
-        @include buttonExpandList();
         display: none;
-        
-        // max-height: 0;
       }
     }
 
+    // --------EXPANDED--------------------------
+
     .button-lg-expanded {
+      z-index: 997;
+      width: 90vw;
+      max-height: 69vh;
+      margin-left: 0.6rem;
       overflow-y: scroll;
       transition: all 300ms ease-out;
-      width: 90vw;
-      height: 69vh;
-      max-height: 69vh;
-      z-index:997;
 
       &::-webkit-scrollbar {
         width: 0px;
       }
 
-      &:nth-child(1) {
-        // margin: 0 auto 0 6vw;
+      .button-lg-top {
+        height: 7.625rem;
         display: flex;
         justify-content: center;
-        flex-direction: column;
-        margin-left: .6rem;
-      }
-      &:nth-child(2) {
-         display: flex;
-        justify-content: center;
-        flex-direction: column;
-        margin-left: .6rem;
-      }
-
-      .button-lg-top {
-        @include btnLgTop();
+        align-items: center;
       }
 
       .button-lg-bottom {
@@ -261,18 +200,45 @@
         }
       }
       .button-expand-list-header {
-        @include buttonExpandListHeader();
+        overflow: hidden;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 40px;
+        padding-top: 0.5rem;
+        color: #ffffff;
+        background-color: #1c1a1a;
+        padding-bottom: 0.5rem;
         max-height: 4rem;
       }
 
       .button-expand-list {
-        @include buttonExpandList();
+        width: 94.8%;
+        min-height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.75rem 0.3rem;
+        // overflow-y: scroll;
+        border-radius: 6px;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid #f2f2f2;
+        color: #ffffff;
         max-height: 4rem;
+
+        &.clicked {
+          box-shadow: 0px 0px 9px 1px #28a318;
+          border: 1px solid #3ce925;
+          color: #ffffff;
+          text-shadow: 0px 1px 0px #42ef2c;
+          transition: all 300ms ease;
+        }
       }
-
-      // ---START EXPANDED HEADER----------------
-
-      // ---END EXPANDED HEADER----------------
 
       .button-expand-list-text-container {
         width: 95%;
@@ -293,4 +259,4 @@
   .hidden {
     display: none !important;
   }
-}
+// }

@@ -23,9 +23,6 @@ const SearchBar = ({ apiData, searchSuggestion }) => {
       const searchLower = inputValue.toLowerCase();
       return (
         (name && name.toLowerCase().includes(searchLower))
-        // (bodyPart && bodyPart.toLowerCase().includes(searchLower)) ||
-        // (equipment && equipment.toLowerCase().includes(searchLower)) ||
-        // (target && target.toLowerCase().includes(searchLower))
       );
     });
 
@@ -52,6 +49,8 @@ const SearchBar = ({ apiData, searchSuggestion }) => {
     ]);
   };
 
+  
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -62,6 +61,13 @@ const SearchBar = ({ apiData, searchSuggestion }) => {
   useEffect(() => {
     searchSuggestion(selectedSuggestion);
   }, [selectedSuggestion, searchSuggestion]);
+
+  const handleSearchClick = () => {
+    const lastFilteredNames = lastFilteredData.map(item => item.name);
+    searchSuggestion(lastFilteredNames);
+    console.log('handleSearchClick called', lastFilteredNames);
+  }
+  
 
   return (
     <div className="wrapper" ref={wrapperRef}>
@@ -75,7 +81,12 @@ const SearchBar = ({ apiData, searchSuggestion }) => {
           onChange={handleSearchChange}
           onFocus={handleFocus}
         />
-        <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+        <button
+         id="searchQuerySubmit" 
+         type="submit" 
+         name="searchQuerySubmit"
+         onClick={handleSearchClick}
+         >
           <svg width="24px" height="24px" viewBox="0 0 24 24">
             <path
               fill="#666666"

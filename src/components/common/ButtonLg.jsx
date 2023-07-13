@@ -25,8 +25,7 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
 
   const handleClickOutside = (event) => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setButtonState(buttonStateContent); // reset the button state
-      setSelected([]); // reset the selected state
+      setButtonState(buttonStateContent); // reset the button state when clicked outside wrapper element
     }
   };
 

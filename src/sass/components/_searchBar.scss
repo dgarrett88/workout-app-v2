@@ -2,24 +2,25 @@
 
 .wrapper {
   width: 100vw;
-  // max-width: 31.25rem;
-  // position: relative;
+  max-width: 498px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // margin: .5rem 0;
 
   .searchBar {
-    width: 87.5%;
+    width: 87.5vw;
+    max-width: 500px;
     display: flex;
-    // flex-direction: column;
     justify-content: center;
     align-items: center;
 
     
     
     #searchQueryInput {
-      width: 100%;
+      width: 87.5vw;
+      max-width: 498px;
       height: 2.5rem;
       background: #f5f5f5;
       outline: none;
@@ -53,25 +54,24 @@
   .suggestions {
     position: absolute;
     top: 14%;
-    margin: 0 auto;
-    background-color: #1c1a1a;
-    height: 31vh;
     width: 87vw;
-    z-index: 998;
-    overflow-y: scroll;
+    max-width: 497px;
+    height: 30.2vh;
+    margin: 0 auto;
+    margin-left: 1px;
+    background-color: #1c1a1a;
     border: 1px solid #dddddd;
     border-top: none;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-    // text-align: center;
+    overflow-y: scroll;
+    z-index: 998;
 
    :nth-child(1) {
-    margin-top: 2rem;
+    margin-top: 1.9rem;
    }
 
    .suggestion {
-    // border-left: 1px solid lime;
-    // border-right: 1px solid lime;
     cursor: pointer;
     padding: 0 1.3rem;
    }

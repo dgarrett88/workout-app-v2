@@ -56,7 +56,7 @@ const Home = ({apiData}) => {
             />
             <ButtonSm 
                 selected={selected}
-                searchSuggestion={selectedSuggestion}
+                searchResults={selectedSuggestion}
                 apiData={apiData} 
                 buttonExpandState={buttonExpandState}
             />

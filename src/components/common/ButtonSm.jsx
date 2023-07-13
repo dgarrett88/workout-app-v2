@@ -3,13 +3,14 @@ import { FaChevronDown } from "react-icons/fa";
 
 import { capitalizeBody } from "../../services/capitalize";
 
-const ButtonSm = ({ selected, apiData, buttonExpandState, searchSuggestion }) => {
-  const [selectedState, setSelectedState] = useState(selected); // Which values have been selected from btn-lg
-  const [data, setData] = useState(apiData); // The entire api data
-  const [filteredData, setFilteredData] = useState([]); // Filtered results from btn-lg selections
-  const [searchFiltered, setSearchFiltered] = useState([]); // Filtered results from search suggestions
-  const [submitClicked, setSubmitClicked] = useState(false); // Tracks if submit button has been clicked
+const ButtonSm = ({ selected, apiData, buttonExpandState, searchResults }) => {
+  const [selectedState, setSelectedState] = useState(selected); 
+  const [data, setData] = useState(apiData); 
+  const [filteredData, setFilteredData] = useState([]); 
+  const [searchFiltered, setSearchFiltered] = useState([]); 
+  const [submitClicked, setSubmitClicked] = useState(false); 
   const [loading, setLoading] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const dynamicRefs = useRef([]);
   const buttonStateContent = useRef([]);
 
@@ -21,25 +22,20 @@ const ButtonSm = ({ selected, apiData, buttonExpandState, searchSuggestion }) =>
     setSelectedState(selected);
   }, [selected]);
 
-
-// Tells this component which values 
-// from btn-lg have been selected
-// filters api data using selected values
-const filterTheData = () => {
-  const filtered = data.filter(
-    (item) =>
-    selectedState.includes(item.bodyPart) &&
-    selectedState.includes(item.equipment)
+  const filterTheData = () => {
+    const filtered = data.filter(
+      (item) =>
+        selectedState.includes(item.bodyPart) &&
+        selectedState.includes(item.equipment)
     );
-    
-    // if values have been selected clear search bar results
+
     if (filtered.length > 0) {
       setSearchFiltered([]);
     }
-    // setSearchFiltered([]);
-    setFilteredData(filtered);
 
-}
+    setFilteredData(filtered);
+  };
+
   useEffect(() => {
     setLoading(true);
     filterTheData();
@@ -47,14 +43,13 @@ const filterTheData = () => {
     setSubmitClicked(false);
   }, [data, selectedState]);
 
-  // Search suggestion
-useEffect(() => {
+  useEffect(() => {
     setLoading(true);
-    if(searchSuggestion.some(item => item.trim() !== '')) {
+    if(searchResults.some(item => typeof item === 'string' && item.trim() !== '')) {
       const matchingResults = data.filter(item =>
-        searchSuggestion.includes(item.bodyPart) ||
-        searchSuggestion.includes(item.equipment) ||
-        searchSuggestion.includes(item.name)
+        searchResults.includes(item.bodyPart) ||
+        searchResults.includes(item.equipment) ||
+        searchResults.includes(item.name)
       );
       if (matchingResults.length > 0) {
         setFilteredData([]);
@@ -62,9 +57,7 @@ useEffect(() => {
       setSearchFiltered(matchingResults);
     }
     setLoading(false);
-  }, [searchSuggestion, data]);
-
-
+  }, [searchResults, data]);
 
   useEffect(() => {
     const createButtonStates = (dataSet) => {
@@ -113,10 +106,19 @@ useEffect(() => {
         onClick={() => {
           setSubmitClicked(true)
           filterTheData()
+          if(filteredData.length === 0) {
+            setShowMessage(true);
+            setTimeout(() => {
+              setShowMessage(false);
+            }, 3000);
+          }
         }}
       >
         GET WORKOUTS
       </div>
+      {filteredData.length === 0 && submitClicked && showMessage && 
+        <p>Please select a <span className="green-span">body part</span> AND <span className="green-span">equipment</span></p>
+      }
       {!loading && shouldRender &&
         dataToRender.map((myData, i) => (
           <div
