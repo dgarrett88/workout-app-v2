@@ -15,6 +15,7 @@ const Home = ({apiData}) => {
     const[buttonExpandState, setButtonExpandState] = useState([]);
 
     const [selectedSuggestion, setSelectedSuggestion] = useState([]);
+    
 
     const handleSelectedChange = (newSelected) => {
         setSelected(newSelected);

@@ -42,7 +42,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem 0.15rem;
+  margin: 0.5rem 0.3rem;
   overflow-y: scroll;
   border-radius: 6px;
   cursor: pointer;
@@ -51,12 +51,12 @@
   color: #ffffff;
 
   &.clicked {
-    background: linear-gradient(to bottom, #5aa469 5%, #3e6c4c 100%);
-    background-color: #5aa469;
-    box-shadow: 0px 0px 0px 2px #3e6c4c;
-    border: 1px solid #3e6c4c;
+    // background: linear-gradient(to bottom, #5aa469 5%, #3e6c4c 100%);
+    // background-color: #5aa469;
+    box-shadow: 0px 0px 9px 0px #42ef2c;
+    border: 1px solid #3cc12a;
     color: #ffffff;
-    text-shadow: 0px 1px 0px #3e6c4c;
+    // text-shadow: 0px 1px 0px #3e6c4c;
     transition: all 0.2s ease;
   }
 }

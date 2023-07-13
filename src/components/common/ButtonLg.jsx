@@ -7,6 +7,7 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
 
   const menuItems = arrays.menuItems;
   const dynamicRefs = useRef([]);
+  const wrapperRef = useRef(null);
 
   // Empty array, used to store mapped state objects
   let buttonStateContent = [];
@@ -21,6 +22,13 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
 
   // State to track which button has been expanded (clicked)
   const [buttonState, setButtonState] = useState(buttonStateContent);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setButtonState(buttonStateContent); // reset the button state
+      setSelected([]); // reset the selected state
+    }
+  };
 
   const handleClick = (i) => {
     // Mapping over buttonState
@@ -50,6 +58,13 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // Passing 'selected' & 'buttonState' state to parent component (Home.jsx)
   useEffect(() => {
     onSelectedChange(selected);
@@ -78,7 +93,7 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
   }, [buttonState]);
 
   return (
-    <div className="button-lg-container">
+    <div className="button-lg-container" ref={wrapperRef}>
       {menuItems.map((item, i) => (
         <div
           key={i}
