@@ -134,18 +134,16 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
             </div>
             <div className="spacer"></div>
           </div>
-          {/* TEST */}
 
           {item.list.map((listItem) => (
             <div
               key={listItem}
               value={listItem}
-              // clicked={}
               className={`${
-                // ---------------------------------WORKING HERE-----------------------------------
+            
                 buttonState[i].expanded ? "button-expand-list" : "button-expand-list"
               } ${selected.includes(listItem) ? "clicked" : ""}`}
-              // ---------------------------------WORKING HERE-----------------------------------
+             
               onClick={() => handleStateValue(i, listItem)}
             >
               <div className="button-expand-list-text-container">
@@ -153,8 +151,6 @@ const ButtonLg = ({ onSelectedChange, onButtonExpandChange }) => {
               </div>
             </div>
           ))}
-
-          {/* TEST END */}
 
           <div
             className={`button-lg-top ${
