@@ -84,7 +84,7 @@ const SearchBar = ({ apiData, searchSuggestion }) => {
         <button
          id="searchQuerySubmit" 
          type="submit" 
-         name="searchQuerySubmit"
+         name="Submit button"
          onClick={handleSearchClick}
          >
           <svg width="24px" height="24px" viewBox="0 0 24 24">
