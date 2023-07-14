@@ -1,6 +1,7 @@
 @use "../abstracts" as *;
 
 .wrapper {
+  position: relative;
   width: 100vw;
   max-width: 498px;
   display: flex;
@@ -53,10 +54,10 @@
   }
   .suggestions {
     position: absolute;
-    top: 14%;
+    top: 60%;
     width: 87vw;
     max-width: 497px;
-    height: 30.2vh;
+    height: 265px;
     margin: 0 auto;
     margin-left: 1px;
     background-color: #1c1a1a;
