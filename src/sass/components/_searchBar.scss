@@ -59,7 +59,7 @@
     max-width: 497px;
     height: 265px;
     margin: 0 auto;
-    // margin-left: 1px;
+    margin-left: 1px;
     background-color: #1c1a1a;
     border: 1px solid #dddddd;
     border-top: none;
@@ -67,15 +67,27 @@
     border-bottom-right-radius: 6px;
     overflow-y: scroll;
     z-index: 998;
-
-   :nth-child(1) {
-    margin-top: 1.9rem;
-   }
-
-   .suggestion {
-    cursor: pointer;
-    padding: 0 1.3rem;
-   }
+  
+    &::-webkit-scrollbar-thumb {
+      width: 0px;
+    }
+  
+    &::-webkit-scrollbar-button {
+      width: 0px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      width: 0px;
+      background-color: green;
+    }
+  
+    &:nth-child(1) {
+      margin-top: 1.9rem;
+    }
+  
+    .suggestion {
+      cursor: pointer;
+      padding: 0 1.3rem;
+    }
   }
-
-}
+}  
